@@ -1,14 +1,13 @@
 package com.fh.controller.system.buttonrights;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
+import com.fh.controller.base.BaseController;
+import com.fh.entity.system.Role;
+import com.fh.service.system.buttonrights.ButtonrightsManager;
+import com.fh.service.system.fhbutton.FhbuttonManager;
+import com.fh.service.system.role.RoleManager;
+import com.fh.util.AppUtil;
+import com.fh.util.Jurisdiction;
+import com.fh.util.PageData;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -17,33 +16,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fh.controller.base.BaseController;
-import com.fh.entity.system.Role;
-import com.fh.util.AppUtil;
-import com.fh.util.PageData;
-import com.fh.util.Jurisdiction;
-import com.fh.service.system.buttonrights.ButtonrightsManager;
-import com.fh.service.system.fhbutton.FhbuttonManager;
-import com.fh.service.system.role.RoleManager;
+import javax.annotation.Resource;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-/** 
+/**
  * 说明：按钮权限
- * 创建人：FH Q313596790
- * 创建时间：2016-01-16
+ * 创建人：CUI
+ * 创建时间：2017/4/10
  */
 @Controller
 @RequestMapping(value="/buttonrights")
 public class ButtonrightsController extends BaseController {
-	
+
 	String menuUrl = "buttonrights/list.do"; //菜单地址(权限用)
+
 	@Resource(name="buttonrightsService")
 	private ButtonrightsManager buttonrightsService;
+
 	@Resource(name="roleService")
 	private RoleManager roleService;
+
 	@Resource(name="fhbuttonService")
 	private FhbuttonManager fhbuttonService;
-	
-	/**列表
+
+	/**
+	 * 列表
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/list")
@@ -52,6 +54,7 @@ public class ButtonrightsController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+        // ROLE_ID 为空 或为 null 将 ROLE_ID 置为 1
 		if(pd.getString("ROLE_ID") == null || "".equals(pd.getString("ROLE_ID").trim())){
 			pd.put("ROLE_ID", "1");										//默认列出第一组角色(初始设计系统用户和会员组不能删除)
 		}
@@ -71,8 +74,9 @@ public class ButtonrightsController extends BaseController {
 		mv.setViewName("system/buttonrights/buttonrights_list");
 		return mv;
 	}
-	
-	/**点击按钮处理关联表
+
+	/**
+     * 点击按钮处理关联表
 	 * @return
 	 * @throws Exception
 	 */
@@ -94,7 +98,7 @@ public class ButtonrightsController extends BaseController {
 		map.put("result", errInfo);
 		return AppUtil.returnObject(new PageData(), map);
 	}
-	
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder){
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
