@@ -1,21 +1,19 @@
 package com.fh.service.system.menu.impl;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Service;
-
 import com.fh.dao.DaoSupport;
 import com.fh.entity.system.Menu;
 import com.fh.service.system.menu.MenuManager;
 import com.fh.util.PageData;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /** 
  * 类名称：MenuService 菜单处理
- * 创建人：FH qq  3  1 3 5 9 6 7 9 0[青苔]
- * 修改时间：2015年10月27日
- * @version v2
+ * @author CUI
+ * @date:  2017/3/6
+ * @version 1.0
  */
 @Service("menuService")
 public class MenuService implements MenuManager{

@@ -1,20 +1,20 @@
 package com.fh.controller.base;
 
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.fh.entity.Page;
 import com.fh.util.Logger;
 import com.fh.util.PageData;
 import com.fh.util.UuidUtil;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author FH Q313596790
- * 修改时间：2015、12、11
+ * 控制器基类
+ * @author CUI
+ * @date： 2017/1/11
  */
 public class BaseController {
 	
@@ -23,7 +23,7 @@ public class BaseController {
 	private static final long serialVersionUID = 6357869213649815390L;
 	
 	/**
-	 * new PageData 对象 (是一个 map 哦)
+	 * 获取当前 request 中所有请求参数 (Hashmap)
 	 * @return
 	 */
 	public PageData getPageData(){
@@ -31,7 +31,7 @@ public class BaseController {
 	}
 	
 	/**
-	 * 得到ModelAndView
+	 * 新生 new ModelAndView
 	 * @return
 	 */
 	public ModelAndView getModelAndView(){

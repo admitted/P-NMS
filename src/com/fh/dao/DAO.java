@@ -1,7 +1,7 @@
 package com.fh.dao;
 /**
- * @author FH Q313596790
- * 修改时间：2015、12、11
+ * @author CUI
+ * 修改时间：2017/4/10
  */
 public interface DAO {
 	

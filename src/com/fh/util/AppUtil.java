@@ -1,20 +1,22 @@
 package com.fh.util;
 
+import org.codehaus.jackson.map.util.JSONPObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.map.util.JSONPObject;
-
-/** 接口参数校验
- * @author:	fh qq313596790[青苔]
- * 修改日期：2015/11/2
+/**
+ * 接口参数校验
+ * @author:	CUI
+ * @date： 2017/1/2
  */
 public class AppUtil  {
 	
 	protected static Logger logger = Logger.getLogger(AppUtil.class);
 	
-	/**检查参数是否完整
+	/**
+     * 检查参数是否完整
 	 * @param method
 	 * @param pd
 	 * @return
@@ -31,7 +33,7 @@ public class AppUtil  {
 			paramArray = Const.APP_REGISTERED_PARAM_ARRAY;  //参数
 			valueArray = Const.APP_REGISTERED_VALUE_ARRAY;  //参数名称
 			
-		}else if(method=="getAppuserByUsernmae"){//根据用户名获取会员信息
+		}else if(method=="getAppuserByUsernmae"){ // 根据用户名获取会员信息
 			paramArray = Const.APP_GETAPPUSER_PARAM_ARRAY;  
 			valueArray = Const.APP_GETAPPUSER_VALUE_ARRAY;
 		}

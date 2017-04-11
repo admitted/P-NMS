@@ -3,21 +3,19 @@ package com.fh.entity.system;
  * 
 * 类名称：角色
 * 类描述： 
-* @author FH QQ 313596790[青苔]
-* 作者单位： 
-* 联系方式：
-* 创建时间：2014年3月10日
-* @version 1.0
+* @author CUI
+* 创建时间：2017/4/6
+* @version 2.0
  */
 public class Role {
-	private String ROLE_ID;
-	private String ROLE_NAME;
-	private String RIGHTS;
-	private String PARENT_ID;
-	private String ADD_QX;
-	private String DEL_QX;
-	private String EDIT_QX;
-	private String CHA_QX;
+	private String ROLE_ID;    // 角色 ID
+	private String ROLE_NAME;  // 角色 name
+	private String RIGHTS;     // 权利
+	private String PARENT_ID;  // 父级 ID ?
+	private String ADD_QX;     // 添加权限
+	private String DEL_QX;	   // 删除权限
+	private String EDIT_QX;    // 修改权限
+	private String CHA_QX;     // 查找权限
 	
 	public String getROLE_ID() {
 		return ROLE_ID;

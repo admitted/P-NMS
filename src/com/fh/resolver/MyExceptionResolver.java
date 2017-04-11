@@ -1,18 +1,17 @@
 package com.fh.resolver;
 
+import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.ModelAndView;
 /**
- * 
-* 类名称：MyExceptionResolver.java
-* 类描述： 
-* @author FH
-* 作者单位： 
-* 联系方式：QQ313596790
-* @version 1.0
+ * 类名称：自定义异常处理类 MyExceptionResolver.java
+ * 类描述：
+ * @author: CUI
+ * @date：  2017/3/20
+ * @version 1.2
  */
 public class MyExceptionResolver implements HandlerExceptionResolver{
 

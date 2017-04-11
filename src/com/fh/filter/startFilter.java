@@ -1,5 +1,14 @@
 package com.fh.filter;
 
+import com.fh.controller.base.BaseController;
+import com.fh.plugin.websocketInstantMsg.ChatServer;
+import com.fh.plugin.websocketOnline.OnlineChatServer;
+import com.fh.util.Const;
+import com.fh.util.DbFH;
+import com.fh.util.Tools;
+import org.java_websocket.WebSocketImpl;
+
+import javax.servlet.*;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
@@ -8,26 +17,10 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-
-import org.java_websocket.WebSocketImpl;
-
-import com.fh.plugin.websocketInstantMsg.ChatServer;
-import com.fh.plugin.websocketOnline.OnlineChatServer;
-import com.fh.util.Const;
-import com.fh.util.DbFH;
-import com.fh.util.Tools;
-import com.fh.controller.base.BaseController;
-
 /**
  * 启动tomcat时运行此类
- * 创建人：FH FH QQ 313596790[青苔]
- * 创建时间：2014年2月17日
+ * @author cui
+ * @date： 2015/12/17
  * @version
  */
 public class startFilter extends BaseController implements Filter{
@@ -103,7 +96,7 @@ public class startFilter extends BaseController implements Filter{
 	 */
 	public void timer() {
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 9); // 控制时
+		calendar.set(Calendar.HOUR_OF_DAY, 9);  // 控制时
 		calendar.set(Calendar.MINUTE, 0); 		// 控制分
 		calendar.set(Calendar.SECOND, 0); 		// 控制秒
 		Date time = calendar.getTime(); 		// 得出执行任务的时间

@@ -5,21 +5,25 @@ import com.fh.util.PageData;
 import com.fh.util.Tools;
 
 /**
- * 分页类
- * @author FH QQ 313596790[青苔]
- * 创建时间：2014年6月28日
+ * 分页类 (包含分页导航菜单)
+ * @author CUI
+ * 创建时间：2017/4/5
  */
 public class Page {
 	
-	private int showCount;      	//每页显示记录数
-	private int totalPage;			//总页数
-	private int totalResult;		//总记录数
-	private int currentPage;		//当前页
-	private int currentResult;	    //当前记录起始索引
-	private boolean entityOrField;	//true:需要分页的地方，传入的参数就是Page实体；false:需要分页的地方，传入的参数所代表的实体拥有Page属性
-	private String pageStr;			//最终页面显示的底部翻页导航，详细见：getPageStr();
+	private int showCount;      	// 每页显示记录数
+	private int totalPage;			// 总页数
+	private int totalResult;		// 总记录数
+	private int currentPage;		// 当前页
+	private int currentResult;	    // 当前记录起始索引
+	private boolean entityOrField;	/* true: 需要分页的地方，传入的参数就是Page实体；
+									   false:需要分页的地方，传入的参数所代表的实体拥有Page属性 */
+	private String pageStr;			// 最终页面显示的底部翻页导航，详细见：getPageStr();
 	private PageData pd = new PageData();
 
+    /**
+     * 构造器
+     */
 	public Page(){
 		try {
 			this.showCount = Integer.parseInt(Tools.readTxtFile(Const.PAGE));
@@ -27,12 +31,16 @@ public class Page {
 			this.showCount = 15;
 		}
 	}
-	
+
+    /**
+     * 获取总页数
+     * @return
+     */
 	public int getTotalPage() {
-		if(totalResult%showCount==0)
-			totalPage = totalResult/showCount;
+		if(totalResult % showCount == 0)
+			totalPage = totalResult / showCount;
 		else
-			totalPage = totalResult/showCount+1;
+			totalPage = totalResult / showCount + 1;
 		return totalPage;
 	}
 	
@@ -47,7 +55,11 @@ public class Page {
 	public void setTotalResult(int totalResult) {
 		this.totalResult = totalResult;
 	}
-	
+
+    /**
+     * 获取当前页
+     * @return
+     */
 	public int getCurrentPage() {
 		if(currentPage<=0)
 			currentPage = 1;
@@ -60,25 +72,25 @@ public class Page {
 		this.currentPage = currentPage;
 	}
 	
-	//拼接分页 页面及JS函数
+	// 拼接分页 页面及JS函数
 	public String getPageStr() {
 		StringBuffer sb = new StringBuffer();
 		if(totalResult>0){
 			sb.append("	<ul class=\"pagination pull-right no-margin\">\n");
 			if(currentPage==1){
-				sb.append("	<li><a>共<font color=red>"+totalResult+"</font>条</a></li>\n");
+				sb.append("	<li><a>共<font color=red>"+ totalResult +"</font>条</a></li>\n");
 				sb.append("	<li><input type=\"number\" value=\"\" id=\"toGoPage\" style=\"width:50px;text-align:center;float:left\" placeholder=\"页码\"/></li>\n");
 				sb.append("	<li style=\"cursor:pointer;\"><a onclick=\"toTZ();\"  class=\"btn btn-mini btn-success\">跳转</a></li>\n");
 				sb.append("	<li><a>首页</a></li>\n");
 				sb.append("	<li><a>上页</a></li>\n");
 			}else{
-				sb.append("	<li><a>共<font color=red>"+totalResult+"</font>条</a></li>\n");
+				sb.append("	<li><a>共<font color=red>"+ totalResult +"</font>条</a></li>\n");
 				sb.append("	<li><input type=\"number\" value=\"\" id=\"toGoPage\" style=\"width:50px;text-align:center;float:left\" placeholder=\"页码\"/></li>\n");
 				sb.append("	<li style=\"cursor:pointer;\"><a onclick=\"toTZ();\"  class=\"btn btn-mini btn-success\">跳转</a></li>\n");
 				sb.append("	<li style=\"cursor:pointer;\"><a onclick=\"nextPage(1)\">首页</a></li>\n");
 				sb.append("	<li style=\"cursor:pointer;\"><a onclick=\"nextPage("+(currentPage-1)+")\">上页</a></li>\n");
 			}
-			int showTag = 5;//分页标签显示数量
+			int showTag = 5; // 分页标签显示数量
 			int startTag = 1;
 			if(currentPage>showTag){
 				startTag = currentPage-1;
@@ -100,7 +112,8 @@ public class Page {
 			sb.append("	<li><a>共"+totalPage+"页</a></li>\n");
 			sb.append("	<li><select title='显示条数' style=\"width:55px;float:left;margin-top:1px;\" onchange=\"changeCount(this.value)\">\n");
 			sb.append("	<option value='"+showCount+"'>"+showCount+"</option>\n");
-			sb.append("	<option value='10'>10</option>\n");
+			// 默认 showPageCount 为 10 : 由 Const.Page 决定
+            sb.append("	<option value='10'>10</option>\n");
 			sb.append("	<option value='20'>20</option>\n");
 			sb.append("	<option value='30'>30</option>\n");
 			sb.append("	<option value='40'>40</option>\n");
