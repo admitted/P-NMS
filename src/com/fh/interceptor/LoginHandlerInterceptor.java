@@ -10,10 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 类名称：登录过滤，权限验证
- * 类描述：
  * @author CUI
- * @date ：2016/11/2
- * @version 1.6
+ * @date ：2017/1/2
+ * @version 1.0
  */
 public class LoginHandlerInterceptor extends HandlerInterceptorAdapter{
 
@@ -22,7 +21,7 @@ public class LoginHandlerInterceptor extends HandlerInterceptorAdapter{
 		// TODO Auto-generated method stub
         // 获取请求的 Serlvet 的映射路径
 		String path = request.getServletPath();
-		//有些页面不需要权限过滤
+		// 有些页面不需要权限过滤
 		if(path.matches(Const.NO_INTERCEPTOR_PATH)){
 			return true;
 		}else{
@@ -30,8 +29,8 @@ public class LoginHandlerInterceptor extends HandlerInterceptorAdapter{
 			if(user!=null){
 				path = path.substring(1, path.length());        // 去除 '/'  [1 , path.length())
 				boolean b = Jurisdiction.hasJurisdiction(path); // 访问权限校验
-				if(!b){
-                    // 如果没有此权限 跳转到登录页面
+                // 如果没有此权限 跳转到登录页面
+                if(!b){
 					response.sendRedirect(request.getContextPath() + Const.LOGIN);
 				}
 				return b;
@@ -42,6 +41,5 @@ public class LoginHandlerInterceptor extends HandlerInterceptorAdapter{
 			}
 		}
 	}
-
 
 }

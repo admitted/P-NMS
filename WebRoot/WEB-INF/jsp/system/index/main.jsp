@@ -62,9 +62,9 @@
 										<div class="pull-left">
 											<select id="skin-colorpicker" class="hide">
 												<option data-skin="no-skin" value="#438EB9">#438EB9</option>
-												<option data-skin="skin-1" value="#222A2D">#222A2D</option>
-												<option data-skin="skin-2" value="#C6487E">#C6487E</option>
-												<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+												<option data-skin="skin-1"  value="#222A2D">#222A2D</option>
+												<option data-skin="skin-2"  value="#C6487E">#C6487E</option>
+												<option data-skin="skin-3"  value="#D0D0D0">#D0D0D0</option>
 											</select>
 										</div>
 										<span>&nbsp; 选择皮肤</span>
@@ -134,26 +134,26 @@
 		<!-- page specific plugin scripts -->
 
 		<!-- ace scripts -->
-		<script src="static/ace/js/ace/elements.scroller.js"></script>
-		<script src="static/ace/js/ace/elements.colorpicker.js"></script>
-		<script src="static/ace/js/ace/elements.fileinput.js"></script>
-		<script src="static/ace/js/ace/elements.typeahead.js"></script>
-		<script src="static/ace/js/ace/elements.wysiwyg.js"></script>
-		<script src="static/ace/js/ace/elements.spinner.js"></script>
-		<script src="static/ace/js/ace/elements.treeview.js"></script>
-		<script src="static/ace/js/ace/elements.wizard.js"></script>
-		<script src="static/ace/js/ace/elements.aside.js"></script>
-		<script src="static/ace/js/ace/ace.js"></script>
-		<script src="static/ace/js/ace/ace.ajax-content.js"></script>
-		<script src="static/ace/js/ace/ace.touch-drag.js"></script>
-		<script src="static/ace/js/ace/ace.sidebar.js"></script>
-		<script src="static/ace/js/ace/ace.sidebar-scroll-1.js"></script>
-		<script src="static/ace/js/ace/ace.submenu-hover.js"></script>
-		<script src="static/ace/js/ace/ace.widget-box.js"></script>
-		<script src="static/ace/js/ace/ace.settings.js"></script>
-		<script src="static/ace/js/ace/ace.settings-rtl.js"></script>
-		<script src="static/ace/js/ace/ace.settings-skin.js"></script>
-		<script src="static/ace/js/ace/ace.widget-on-reload.js"></script>
+		<script src="static/ace/js/ace/elements.scroller.js"	></script>
+		<script src="static/ace/js/ace/elements.colorpicker.js"	></script>
+		<script src="static/ace/js/ace/elements.fileinput.js"	></script>
+		<script src="static/ace/js/ace/elements.typeahead.js"	></script>
+		<script src="static/ace/js/ace/elements.wysiwyg.js"		></script>
+		<script src="static/ace/js/ace/elements.spinner.js"		></script>
+		<script src="static/ace/js/ace/elements.treeview.js"	></script>
+		<script src="static/ace/js/ace/elements.wizard.js"		></script>
+		<script src="static/ace/js/ace/elements.aside.js"		></script>
+		<script src="static/ace/js/ace/ace.js"					></script>
+		<script src="static/ace/js/ace/ace.ajax-content.js"		></script>
+		<script src="static/ace/js/ace/ace.touch-drag.js"		></script>
+		<script src="static/ace/js/ace/ace.sidebar.js"			></script>
+		<script src="static/ace/js/ace/ace.sidebar-scroll-1.js"	></script>
+		<script src="static/ace/js/ace/ace.submenu-hover.js"	></script>
+		<script src="static/ace/js/ace/ace.widget-box.js"		></script>
+		<script src="static/ace/js/ace/ace.settings.js"			></script>
+		<script src="static/ace/js/ace/ace.settings-rtl.js"		></script>
+		<script src="static/ace/js/ace/ace.settings-skin.js"	></script>
+		<script src="static/ace/js/ace/ace.widget-on-reload.js"	></script>
 		<script src="static/ace/js/ace/ace.searchbox-autocomplete.js"></script>
 		<!-- inline scripts related to this page -->
 
@@ -166,12 +166,13 @@
 	
 		<!--引入属于此页面的js -->
 		<script type="text/javascript" src="static/js/myjs/head.js"></script>
-		<!--引入属于此页面的js -->
 		<script type="text/javascript" src="static/js/myjs/index.js"></script>
+
 		<!--引入弹窗组件start-->
 		<script type="text/javascript" src="plugins/attention/zDialog/zDrag.js"></script>
 		<script type="text/javascript" src="plugins/attention/zDialog/zDialog.js"></script>
 		<!--引入弹窗组件end-->
+
 		<!--提示框-->
 		<script type="text/javascript" src="static/js/jquery.tips.js"></script>
 	</body>

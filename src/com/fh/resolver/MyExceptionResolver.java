@@ -8,10 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 类名称：自定义异常处理类 MyExceptionResolver.java
- * 类描述：
  * @author: CUI
  * @date：  2017/3/20
- * @version 1.2
+ * @version 1.0
  */
 public class MyExceptionResolver implements HandlerExceptionResolver{
 

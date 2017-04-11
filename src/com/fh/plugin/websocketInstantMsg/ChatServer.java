@@ -15,10 +15,9 @@ import org.java_websocket.server.WebSocketServer;
 
 
 /**
- * 即时通讯
- * @author FH
- * QQ 313596790
- * 2015-5-16
+ * 即时通讯 服务
+ * @author: CUI
+ * @date: 2017/3/16
  */
 public class ChatServer extends WebSocketServer{
 

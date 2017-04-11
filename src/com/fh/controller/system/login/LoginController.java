@@ -65,7 +65,7 @@ public class LoginController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		// request 参数封装的 map 对象
 		PageData pd = this.getPageData();
-		pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); //读取系统名称 "SYSNAME":"FH Admin"
+		pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); // 在显示登录之前 获取 本管理系统的名称 : PNMS
 		mv.setViewName("system/index/login");
 		mv.addObject("pd",pd);
 		return mv;
@@ -82,7 +82,7 @@ public class LoginController extends BaseController {
 		Map<String,String> map = new HashMap<String,String>();
 		PageData pd = this.getPageData();
 		String errInfo = "";
-		String KEYDATA[] = pd.getString("KEYDATA").replaceAll("qq313596790fh", "").replaceAll("QQ978336446fh", "").split(",fh,");
+		String KEYDATA[] = pd.getString("KEYDATA").replaceAll("qq876198439cui", "").split(",");
 		if(null != KEYDATA && KEYDATA.length == 3){
 			Session session = Jurisdiction.getSession(); //获取shiro管理的会话session
 			String sessionCode = (String)session.getAttribute(Const.SESSION_SECURITY_CODE);		//获取session中的验证码
