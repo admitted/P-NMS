@@ -152,53 +152,55 @@ public class LoginController extends BaseController {
 		PageData     pd = this.getPageData();
 		try{
 			Session session = Jurisdiction.getSession();
-			User user = (User)session.getAttribute(Const.SESSION_USER);				 	//读取 session 存的用户信息 (9 fields)
+			User user = (User)session.getAttribute(Const.SESSION_USER);				 	 //读取 session 存的用户信息 (9 fields)
+			// session 可能会失效 , 失效时间 = 600分钟????
 			if (user != null) {
 				//先看 session 有没有角色信息 , 没有再从数据库取 减少数据库查询
-				User userAndRole = (User)session.getAttribute(Const.SESSION_USERROL);	//读取 session  中用户所有信息(含角色信息)
+				User userAndRole = (User)session.getAttribute(Const.SESSION_USERROL);	 //读取 session  中用户所有信息(含角色信息)
 				if(null == userAndRole){
-					user = userService.getUserAndRoleById(user.getUSER_ID());		 	//通过用户ID读取 此用户所有信息(含角色信息)
-					session.setAttribute(Const.SESSION_USERROL, user);				 	//存入 session
+					user = userService.getUserAndRoleById(user.getUSER_ID());		 	 //通过用户ID读取 此用户所有信息(含角色信息)
+					session.setAttribute(Const.SESSION_USERROL, user);				 	 //存入 session
 				}else{
 					user = userAndRole;
 				}
 				// 以下的 user 包含用户的所有信息
 				String USERNAME = user.getUSERNAME();
-				Role role = user.getRole();											 	//获取用户角色
-				String roleRights = ((role != null) ? role.getRIGHTS() : "");		 	//角色权限(菜单权限)
-				session.setAttribute(USERNAME + Const.SESSION_ROLE_RIGHTS, roleRights); //将角色权限存入session
-				session.setAttribute(Const.SESSION_USERNAME, USERNAME);				 	//放入用户名到session
-				List<Menu> allMenuList = new ArrayList<Menu>();
+				Role role = user.getRole();											 	 //获取用户角色
+				String roleRights = ((role != null) ? role.getRIGHTS() : "");		 	 //角色权限(菜单权限)
+				session.setAttribute(USERNAME + Const.SESSION_ROLE_RIGHTS, roleRights);  //将角色权限存入session
+				session.setAttribute(Const.SESSION_USERNAME, USERNAME);				 	 //放入用户名到session
+				List<Menu> MenuList = new ArrayList<Menu>();
 				if(null == session.getAttribute(USERNAME + Const.SESSION_allmenuList)){	
-					allMenuList = menuService.listAllMenuQx("0");					 	// "0" : 获取所有菜单
+					MenuList = menuService.listAllMenuQx("0");					 	     // "0" : 获取所有菜单
 					if(Tools.notEmpty(roleRights)){
-						allMenuList = this.readMenu(allMenuList, roleRights);		 	//根据角色权限获取本权限的菜单列表
+						MenuList = this.readMenu(MenuList, roleRights);		 	         //根据角色权限获取本权限的菜单列表
 					}
-					session.setAttribute(USERNAME + Const.SESSION_allmenuList, allMenuList);//菜单权限放入session中
+					session.setAttribute(USERNAME + Const.SESSION_allmenuList, MenuList);//菜单权限放入session中
 				}else{
-					allMenuList = (List<Menu>)session.getAttribute(USERNAME + Const.SESSION_allmenuList);
+					MenuList = (List<Menu>)session.getAttribute(USERNAME + Const.SESSION_allmenuList);
 				}
-				//切换菜单处理=====start
+				// 切换菜单处理=====start
 				List<Menu> menuList = new ArrayList<Menu>();
-				if(null == session.getAttribute(USERNAME + Const.SESSION_menuList) || ("yes".equals(changeMenu))){
+				if(null == session.getAttribute(USERNAME + Const.SESSION_menuList) || ("yes".equals(changeMenu))) {
 					List<Menu> menuList1 = new ArrayList<Menu>();
 					List<Menu> menuList2 = new ArrayList<Menu>();
-					//拆分菜单
-					for(int i=0;i<allMenuList.size();i++){
-						Menu menu = allMenuList.get(i);
-						if("1".equals(menu.getMENU_TYPE())){
+					// 拆分菜单 MENU_TYPE  1:系统菜单 2:业务菜单
+					for (int i = 0; i < MenuList.size(); i++) {
+						Menu menu = MenuList.get(i);
+						if ("1".equals(menu.getMENU_TYPE())) {
 							menuList1.add(menu);
-						}else{
+						} else {
 							menuList2.add(menu);
 						}
 					}
 					session.removeAttribute(USERNAME + Const.SESSION_menuList);
-					if("2".equals(session.getAttribute("changeMenu"))){
+					// changeMenu 切换业务菜单\系统菜单  2变1; 1变2
+					if ("2".equals(session.getAttribute("changeMenu"))) {
 						session.setAttribute(USERNAME + Const.SESSION_menuList, menuList1);
 						session.removeAttribute("changeMenu");
 						session.setAttribute("changeMenu", "1");
 						menuList = menuList1;
-					}else{
+					} else {
 						session.setAttribute(USERNAME + Const.SESSION_menuList, menuList2);
 						session.removeAttribute("changeMenu");
 						session.setAttribute("changeMenu", "2");
@@ -207,22 +209,23 @@ public class LoginController extends BaseController {
 				}else{
 					menuList = (List<Menu>)session.getAttribute(USERNAME + Const.SESSION_menuList);
 				}
-				//切换菜单处理=====end
+				// 切换菜单处理=====end
 				if(null == session.getAttribute(USERNAME + Const.SESSION_QX)){
-					session.setAttribute(USERNAME + Const.SESSION_QX, this.getUQX(USERNAME));	//按钮权限放到session中
+					// 按钮权限(增删改查) 放到session中
+					session.setAttribute(USERNAME + Const.SESSION_QX, this.getUQX(USERNAME));
 				}
-				this.getRemortIP(USERNAME);	//更新登录IP
+				this.getRemortIP(USERNAME);						// 更新登录IP
 				mv.setViewName("system/index/main");
-				mv.addObject("user", user);
-				mv.addObject("menuList", menuList);
+				mv.addObject("user", user);						// user 包含用户的所有信息
+				mv.addObject("menuList", menuList);				// 业务菜单 或 系统菜单
 			}else {
-				mv.setViewName("system/index/login");//session失效后跳转登录页面
+				mv.setViewName("system/index/login");			// session失效后跳转登录页面
 			}
 		} catch(Exception e){
 			mv.setViewName("system/index/login");
 			logger.error(e.getMessage(), e);
 		}
-		pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); //读取系统名称
+		pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); 	// 读取系统名称
 		mv.addObject("pd",pd);
 		return mv;
 	}
@@ -233,11 +236,12 @@ public class LoginController extends BaseController {
 	 * @param roleRights：加密的权限字符串
 	 * @return
 	 */
-	public List<Menu> readMenu(List<Menu> menuList,String roleRights){
-		for(int i=0;i<menuList.size();i++){
+	public List<Menu> readMenu(List<Menu> menuList, String roleRights) {
+		for (int i = 0; i < menuList.size(); i++) {
+			// 判断是否有此菜单权限 , 若有此菜单权限 ,设置 hasMenu 为 TRUE
 			menuList.get(i).setHasMenu(RightsHelper.testRights(roleRights, menuList.get(i).getMENU_ID()));
-			if(menuList.get(i).isHasMenu()){		//判断是否有此菜单权限
-				this.readMenu(menuList.get(i).getSubMenu(), roleRights);//是：继续排查其子菜单
+			if (menuList.get(i).isHasMenu()) {
+				this.readMenu(menuList.get(i).getSubMenu(), roleRights); // 若有此菜单权限,继续排查其子菜单权限
 			}
 		}
 		return menuList;
@@ -258,12 +262,12 @@ public class LoginController extends BaseController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(value="/login_default")
-	public ModelAndView defaultPage() throws Exception{
+	public ModelAndView defaultPage() throws Exception {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
-		pd.put("userCount", Integer.parseInt(userService.getUserCount("").get("userCount").toString())-1);				//系统用户数
-		pd.put("appUserCount", Integer.parseInt(appuserService.getAppUserCount("").get("appUserCount").toString()));	//会员数
-		mv.addObject("pd",pd);
+		pd.put("userCount", Integer.parseInt(userService.getUserCount("").get("userCount").toString()) - 1);            //系统用户数
+		pd.put("appUserCount", Integer.parseInt(appuserService.getAppUserCount("").get("appUserCount").toString()));    //会员数
+		mv.addObject("pd", pd);
 		mv.setViewName("system/index/default");
 		return mv;
 	}
@@ -273,12 +277,12 @@ public class LoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value="/logout")
-	public ModelAndView logout(){
-		String USERNAME = Jurisdiction.getUsername();	//当前登录的用户名
-		logBefore(logger, USERNAME+" >> 退出系统 <<");
+	public ModelAndView logout() {
+		String USERNAME = Jurisdiction.getUsername();    // 当前登录的用户名
+		logBefore(logger, USERNAME + " >> 退出系统 <<");
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
-		Session session = Jurisdiction.getSession();	//以下清除session缓存
+		Session session = Jurisdiction.getSession();     // 以下清除session缓存
 		session.removeAttribute(Const.SESSION_USER);
 		session.removeAttribute(USERNAME + Const.SESSION_ROLE_RIGHTS);
 		session.removeAttribute(USERNAME + Const.SESSION_allmenuList);
@@ -288,14 +292,14 @@ public class LoginController extends BaseController {
 		session.removeAttribute(Const.SESSION_USERNAME);
 		session.removeAttribute(Const.SESSION_USERROL);
 		session.removeAttribute("changeMenu");
-		//shiro销毁登录
-		Subject subject = SecurityUtils.getSubject(); 
+		// shiro销毁登录
+		Subject subject = SecurityUtils.getSubject();
 		subject.logout();
 		pd = this.getPageData();
 		pd.put("msg", pd.getString("msg"));
-		pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); //读取系统名称
+		pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); // 读取系统名称
 		mv.setViewName("system/index/login");
-		mv.addObject("pd",pd);
+		mv.addObject("pd", pd);
 		return mv;
 	}
 	
@@ -303,29 +307,29 @@ public class LoginController extends BaseController {
 	 * 获取用户权限
 	 * @return
 	 */
-	public Map<String, String> getUQX(String USERNAME){
+	public Map<String, String> getUQX(String USERNAME) {
 		PageData pd = new PageData();
 		Map<String, String> map = new HashMap<String, String>();
 		try {
 			pd.put(Const.SESSION_USERNAME, USERNAME);
-			pd.put("ROLE_ID", userService.findByUsername(pd).get("ROLE_ID").toString());//获取角色ID
-			pd = roleService.findObjectById(pd);										//获取角色信息														
-			map.put("adds",  pd.getString("ADD_QX"));	//增
-			map.put("dels",  pd.getString("DEL_QX"));	//删
-			map.put("edits", pd.getString("EDIT_QX"));	//改
-			map.put("chas",  pd.getString("CHA_QX"));	//查
+			pd.put("ROLE_ID", userService.findByUsername(pd).get("ROLE_ID").toString());// 获取角色ID
+			pd = roleService.findObjectById(pd);                                        // 获取角色信息
+			map.put("adds",  pd.getString("ADD_QX"));    // 增
+			map.put("dels",  pd.getString("DEL_QX"));    // 删
+			map.put("edits", pd.getString("EDIT_QX"));   // 改
+			map.put("chas",  pd.getString("CHA_QX"));    // 查
 			List<PageData> buttonQXnamelist = new ArrayList<PageData>();
-			if("admin".equals(USERNAME)){
-				buttonQXnamelist = fhbuttonService.listAll(pd);					//admin用户拥有所有按钮权限
-			}else{
-				buttonQXnamelist = buttonrightsService.listAllBrAndQxname(pd);	//此角色拥有的按钮权限标识列表
+			if ("admin".equals(USERNAME)) {
+				buttonQXnamelist = fhbuttonService.listAll(pd);                    // admin用户拥有所有按钮权限
+			} else {
+				buttonQXnamelist = buttonrightsService.listAllBrAndQxname(pd);     // 此角色拥有的按钮权限标识列表
 			}
-			for(int i=0;i<buttonQXnamelist.size();i++){
-				map.put(buttonQXnamelist.get(i).getString("QX_NAME"),"1");		//按钮权限
+			for (int i = 0; i < buttonQXnamelist.size(); i++) {
+				map.put(buttonQXnamelist.get(i).getString("QX_NAME"), "1");        // 按钮权限
 			}
 		} catch (Exception e) {
 			logger.error(e.toString(), e);
-		}	
+		}
 		return map;
 	}
 	
@@ -334,15 +338,15 @@ public class LoginController extends BaseController {
 	 * @param USERNAME
 	 * @throws Exception
 	 */
-	public void getRemortIP(String USERNAME) throws Exception {  
+	public void getRemortIP(String USERNAME) throws Exception {
 		PageData pd = new PageData();
 		HttpServletRequest request = this.getRequest();
 		String ip = "";
-		if (request.getHeader("x-forwarded-for") == null) {  
-			ip = request.getRemoteAddr();  
-	    }else{
-	    	ip = request.getHeader("x-forwarded-for");  
-	    }
+		if (request.getHeader("x-forwarded-for") == null) {
+			ip = request.getRemoteAddr();
+		} else {
+			ip = request.getHeader("x-forwarded-for");
+		}
 		pd.put("USERNAME", USERNAME);
 		pd.put("IP", ip);
 		userService.saveIP(pd);

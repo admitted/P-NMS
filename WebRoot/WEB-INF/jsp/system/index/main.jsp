@@ -117,6 +117,7 @@
 						</div>
 						</div>
 						<div>
+                            <!-- 核心 tab 内容在这里 iframe -->
 							<iframe name="mainFrame" id="mainFrame" frameborder="0" src="tab.do" style="margin:0 auto;width:100%;height:100%;"></iframe>
 						</div>
 						</div><!-- /.row -->	

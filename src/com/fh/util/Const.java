@@ -8,12 +8,12 @@ import org.springframework.context.ApplicationContext;
  * @date： 2017/1/2
 */
 public class Const {
-	public static final String SESSION_SECURITY_CODE 	= "sessionSecCode";					//验证码
-	public static final String SESSION_USER 			= "sessionUser";					//session用的用户
+	public static final String SESSION_SECURITY_CODE 	= "sessionSecCode";					//用户登录验证码
+	public static final String SESSION_USER 			= "sessionUser";					//session存的用户
 	public static final String SESSION_ROLE_RIGHTS 		= "sessionRoleRights";				//用户权限
-	public static final String SESSION_menuList 		= "menuList";						//当前菜单
-	public static final String SESSION_allmenuList 		= "allmenuList";					//全部菜单
-	public static final String SESSION_QX 				= "QX";
+	public static final String SESSION_menuList 		= "menuList";						//当前用户拥有权限的菜单(业务菜单 或 系统菜单 二选一)
+	public static final String SESSION_allmenuList 		= "allmenuList";					//当前用户拥有权限的菜单(业务菜单 和 系统菜单 全部)
+	public static final String SESSION_QX 				= "QX";								//当前用户数据权限(增删改查)
 	public static final String SESSION_userpds 			= "userpds";
 	public static final String SESSION_USERROL 			= "USERROL";						//用户对象 含角色信息
 	public static final String SESSION_USERNAME 		= "USERNAME";						//用户名
@@ -21,7 +21,7 @@ public class Const {
 	public static final String FALSE 					= "F";
 	public static final String LOGIN 					= "/login_toLogin.do";				//登录地址
 	public static final String SYSNAME 					= "admin/config/SYSNAME.txt";		//系统名称路径
-	public static final String PAGE						= "admin/config/PAGE.txt";			//分页条数配置路径
+	public static final String PAGE						= "admin/config/PAGE.txt";			//分页条数配置路径 默认10个
 	public static final String EMAIL 					= "admin/config/EMAIL.txt";			//邮箱服务器配置路径
 	public static final String SMS1 					= "admin/config/SMS1.txt";			//短信账户配置路径1
 	public static final String SMS2 					= "admin/config/SMS2.txt";			//短信账户配置路径2
