@@ -141,8 +141,8 @@
 <script type="text/javascript">
     //服务器校验
     function severCheck() {
+        // 先客户端校验 , 若校验通过 将登陆信息交于 服务器校验
         if (check()) {
-
             var loginname = $("#loginname").val();
             var password = $("#password").val();
             var code = "qq876198439cui" + loginname + "," + password + "," + $("#code").val();
@@ -152,10 +152,10 @@
                 data: {KEYDATA: code, tm: new Date().getTime()},
                 dataType: 'json',
                 cache: false,
-                success: function (data) {
+                success: function (data) { // data 是由 map 集合 转成的 JSON
                     if ("success" == data.result) {
                         saveCookie();
-                        window.location.href = "main/index";
+                        window.location.href = "main/index";  // 向服务端发送请求
                     } else if ("usererror" == data.result) {
                         $("#loginname").tips({
                             side: 1,
@@ -211,9 +211,7 @@
 
     //客户端校验
     function check() {
-
         if ($("#loginname").val() == "") {
-
             $("#loginname").tips({
                 side: 2,
                 msg: '用户名不得为空',
@@ -228,7 +226,6 @@
         }
 
         if ($("#password").val() == "") {
-
             $("#password").tips({
                 side: 2,
                 msg: '密码不得为空',
@@ -240,7 +237,6 @@
             return false;
         }
         if ($("#code").val() == "") {
-
             $("#code").tips({
                 side: 1,
                 msg: '验证码不得为空',

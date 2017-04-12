@@ -1,16 +1,12 @@
 package com.fh.util;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 /** 
- * 说明：参数封装Map [ 封装了 request 所有参数的 map ]
- * 修改时间：2017年3月20日 cui
- * @version
+ * 参数封装Map [ 封装了 request 所有参数的 map ]
+ * @author: cui
+ * @date: 2017/3/20
+ * @version: 1.0
  */
 public class PageData extends HashMap implements Map{
 	
@@ -49,7 +45,10 @@ public class PageData extends HashMap implements Map{
 		}
 		map = returnMap;
 	}
-	
+
+    /**
+     * 参数封装Map [ 封装了 request 所有参数的 map ]
+     */
 	public PageData() {
 		map = new HashMap();
 	}

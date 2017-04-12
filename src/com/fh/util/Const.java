@@ -3,14 +3,14 @@ package com.fh.util;
 import org.springframework.context.ApplicationContext;
 
 /**
- * 项目名称：常量类集
+ * 常量类集
  * @author: CUI
- * 修改日期：2017/1/2
+ * @date： 2017/1/2
 */
 public class Const {
 	public static final String SESSION_SECURITY_CODE 	= "sessionSecCode";					//验证码
 	public static final String SESSION_USER 			= "sessionUser";					//session用的用户
-	public static final String SESSION_ROLE_RIGHTS 		= "sessionRoleRights";
+	public static final String SESSION_ROLE_RIGHTS 		= "sessionRoleRights";				//用户权限
 	public static final String SESSION_menuList 		= "menuList";						//当前菜单
 	public static final String SESSION_allmenuList 		= "allmenuList";					//全部菜单
 	public static final String SESSION_QX 				= "QX";

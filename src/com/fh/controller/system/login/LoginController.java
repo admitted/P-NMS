@@ -31,8 +31,8 @@ import java.util.List;
 import java.util.Map;
 /**
  * 总入口
- * @author  fh , Cui
- * 修改日期：2017/3/19
+ * @author: cui
+ * @date： 2017/3/19
  */
 @Controller
 public class LoginController extends BaseController {
@@ -85,12 +85,12 @@ public class LoginController extends BaseController {
 		String KEYDATA[] = pd.getString("KEYDATA").replaceAll("qq876198439cui", "").split(",");
 		if(null != KEYDATA && KEYDATA.length == 3){
 			Session session = Jurisdiction.getSession(); //获取shiro管理的会话session
-			String sessionCode = (String)session.getAttribute(Const.SESSION_SECURITY_CODE);		//获取session中的验证码
+			String sessionCode = (String)session.getAttribute(Const.SESSION_SECURITY_CODE); //获取session中的验证码
 			String code = KEYDATA[2];
 			if(null == code || "".equals(code)){//判断效验码是否为空
 				errInfo = "nullcode";
 			}else{
-				String USERNAME = KEYDATA[0];	//登录过来的用户名
+				String USERNAME  = KEYDATA[0];	//登录过来的用户名
 				String PASSWORD  = KEYDATA[1];	//登录过来的密码
 				pd.put("USERNAME", USERNAME);
 				if(Tools.notEmpty(sessionCode) && sessionCode.equalsIgnoreCase(code)){		//判断登录验证码是否正确
@@ -110,9 +110,9 @@ public class LoginController extends BaseController {
 						user.setLAST_LOGIN(pd.getString("LAST_LOGIN"));
 						user.setIP(pd.getString("IP"));
 						user.setSTATUS(pd.getString("STATUS"));
-						session.setAttribute(Const.SESSION_USER, user);			//把用户信息放session中
-						session.removeAttribute(Const.SESSION_SECURITY_CODE);	//清除登录验证码的session
-						//shiro加入身份验证
+						session.setAttribute(Const.SESSION_USER, user);			// 把用户信息放session中 : 供以后使用
+						session.removeAttribute(Const.SESSION_SECURITY_CODE);	// 清除登录验证码的session
+						// shiro加入身份验证
 						Subject subject = SecurityUtils.getSubject(); 
 					    UsernamePasswordToken token = new UsernamePasswordToken(USERNAME, PASSWORD); 
 					    try { 
@@ -121,20 +121,21 @@ public class LoginController extends BaseController {
 					    	errInfo = ">> Authentication failed 身份验证失败！";
 					    }
 					}else{
-						errInfo = "usererror"; 				//用户名或密码有误
+						errInfo = "usererror"; 				// 用户名或密码有误
 						logBefore(logger, USERNAME+">> login error password or username 登录系统密码或用户名错误");
 					}
 				}else{
-					errInfo = "codeerror";				 	//验证码输入有误
+					errInfo = "codeerror";				 	// 验证码输入有误
 				}
 				if(Tools.isEmpty(errInfo)){
-					errInfo = "success";					//验证成功
+					errInfo = "success";					// 验证成功
 					logBefore(logger, USERNAME+" >> login success ");
 				}
 			}
 		}else{
 			errInfo = "error";	//缺少参数
 		}
+		// 单把错误信息放到 map 里去
 		map.put("result", errInfo);
 		return AppUtil.returnObject(new PageData(), map);
 	}
@@ -151,26 +152,27 @@ public class LoginController extends BaseController {
 		PageData     pd = this.getPageData();
 		try{
 			Session session = Jurisdiction.getSession();
-			User user = (User)session.getAttribute(Const.SESSION_USER);				//读取session中的用户信息(单独用户信息)
+			User user = (User)session.getAttribute(Const.SESSION_USER);				 	//读取 session 存的用户信息 (9 fields)
 			if (user != null) {
 				//先看 session 有没有角色信息 , 没有再从数据库取 减少数据库查询
-				User userr = (User)session.getAttribute(Const.SESSION_USERROL);		//读取session中的用户信息(含角色信息)
-				if(null == userr){
-					user = userService.getUserAndRoleById(user.getUSER_ID());		//通过用户ID读取用户信息和角色信息
-					session.setAttribute(Const.SESSION_USERROL, user);				//存入session	
+				User userAndRole = (User)session.getAttribute(Const.SESSION_USERROL);	//读取 session  中用户所有信息(含角色信息)
+				if(null == userAndRole){
+					user = userService.getUserAndRoleById(user.getUSER_ID());		 	//通过用户ID读取 此用户所有信息(含角色信息)
+					session.setAttribute(Const.SESSION_USERROL, user);				 	//存入 session
 				}else{
-					user = userr;
+					user = userAndRole;
 				}
+				// 以下的 user 包含用户的所有信息
 				String USERNAME = user.getUSERNAME();
-				Role role = user.getRole();											//获取用户角色
-				String roleRights = ((role != null) ? role.getRIGHTS() : "");		//角色权限(菜单权限)
+				Role role = user.getRole();											 	//获取用户角色
+				String roleRights = ((role != null) ? role.getRIGHTS() : "");		 	//角色权限(菜单权限)
 				session.setAttribute(USERNAME + Const.SESSION_ROLE_RIGHTS, roleRights); //将角色权限存入session
-				session.setAttribute(Const.SESSION_USERNAME, USERNAME);				//放入用户名到session
+				session.setAttribute(Const.SESSION_USERNAME, USERNAME);				 	//放入用户名到session
 				List<Menu> allMenuList = new ArrayList<Menu>();
 				if(null == session.getAttribute(USERNAME + Const.SESSION_allmenuList)){	
-					allMenuList = menuService.listAllMenuQx("0");					// "0" : 获取所有菜单
+					allMenuList = menuService.listAllMenuQx("0");					 	// "0" : 获取所有菜单
 					if(Tools.notEmpty(roleRights)){
-						allMenuList = this.readMenu(allMenuList, roleRights);		//根据角色权限获取本权限的菜单列表
+						allMenuList = this.readMenu(allMenuList, roleRights);		 	//根据角色权限获取本权限的菜单列表
 					}
 					session.setAttribute(USERNAME + Const.SESSION_allmenuList, allMenuList);//菜单权限放入session中
 				}else{
@@ -267,7 +269,7 @@ public class LoginController extends BaseController {
 	}
 	
 	/**
-	 * &#x7528;&#x6237;&#x6ce8;&#x9500;
+	 * 退出登录
 	 * @return
 	 */
 	@RequestMapping(value="/logout")
