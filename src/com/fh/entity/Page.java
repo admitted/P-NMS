@@ -6,8 +6,9 @@ import com.fh.util.Tools;
 
 /**
  * 分页类 (包含分页导航菜单)
- * @author CUI
- * 创建时间：2017/4/5
+ * @author: CUI
+ * @date： 2017/4/5
+ * @version: 2.0
  */
 public class Page {
 	

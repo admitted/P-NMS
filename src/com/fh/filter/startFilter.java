@@ -21,7 +21,7 @@ import java.util.TimerTask;
  * 启动tomcat时运行此类
  * @author cui
  * @date： 2015/12/17
- * @version
+ * @version 1.2
  */
 public class startFilter extends BaseController implements Filter{
 	
