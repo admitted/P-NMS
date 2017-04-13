@@ -1,16 +1,15 @@
 package com.fh.plugin.websocketOnline;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.UnknownHostException;
-
 import net.sf.json.JSONObject;
-
 import org.java_websocket.WebSocket;
 import org.java_websocket.WebSocketImpl;
 import org.java_websocket.framing.Framedata;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
 
 /**
  * 在线管理
@@ -122,7 +121,7 @@ public class OnlineChatServer extends WebSocketServer{
 	
 	/**
 	 * 用户下线处理
-	 * @param user
+	 * @param conn
 	 */
 	public void userLeave(WebSocket conn){
 		onlineMaganger(2,null,conn);
@@ -130,7 +129,7 @@ public class OnlineChatServer extends WebSocketServer{
 
 	/**
 	 * 获取在线总数
-	 * @param user
+	 * @param conn
 	 */
 	public void getUserCount(WebSocket conn){
 		JSONObject result = new JSONObject();
@@ -141,7 +140,6 @@ public class OnlineChatServer extends WebSocketServer{
 	
 	/**
 	 * 获取在线用户列表
-	 * @param user
 	 */
 	public void getUserList(){
 		WebSocket conn =  OnlineChatServerPool.getFhadmin();
@@ -173,7 +171,7 @@ public class OnlineChatServer extends WebSocketServer{
 	
 	/**
 	 * 有用户登录系统,加入在线列表
-	 * @param conn
+	 * @param user
 	 */
 	public void addUserToFhadmin(String user){
 		WebSocket conn =  OnlineChatServerPool.getFhadmin();

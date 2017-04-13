@@ -172,7 +172,7 @@ public class LoginController extends BaseController {
 				List<Menu> MenuList = new ArrayList<Menu>();
 				if(null == session.getAttribute(USERNAME + Const.SESSION_allmenuList)){
 					MenuList = menuService.listAllMenuQx("0");					 	     // "0" : 获取所有菜单
-					if(USERNAME.equals("admin")){										 //若是 admin 登录 , 获取所有菜单
+					if("admin".equals(USERNAME)){										 //若是 admin 登录 , 获取所有菜单
 						MenuList = this.readAllMenu(MenuList);
 					}else{
 						if(Tools.notEmpty(roleRights)){
@@ -237,8 +237,8 @@ public class LoginController extends BaseController {
 	
 	/**
 	 * 根据角色权限获取本权限的菜单列表(递归处理)
-	 * @param menuList：传入的总菜单
-	 * @param roleRights：加密的权限字符串
+	 * @param menuList：   传入的总菜单
+	 * @param roleRights： 加密的权限字符串
 	 * @return
 	 */
 	public List<Menu> readMenu(List<Menu> menuList, String roleRights) {
@@ -255,7 +255,6 @@ public class LoginController extends BaseController {
 	/**
 	 * 获取 admin 全部菜单列表(递归处理)
 	 * @param allMenuList：传入的总菜单
-	 * @param roleRights：加密的权限字符串
 	 * @return
 	 */
 	public List<Menu> readAllMenu(List<Menu> allMenuList) {
@@ -326,7 +325,7 @@ public class LoginController extends BaseController {
 	}
 	
 	/**
-	 * 获取用户权限
+	 * 获取用户权限 (CRUD)
 	 * @return
 	 */
 	public Map<String, String> getUQX(String USERNAME) {
@@ -342,9 +341,9 @@ public class LoginController extends BaseController {
 			map.put("chas",  pd.getString("CHA_QX"));    // 查
 			List<PageData> buttonQXnamelist = new ArrayList<PageData>();
 			if ("admin".equals(USERNAME)) {
-				buttonQXnamelist = fhbuttonService.listAll(pd);                    // admin用户拥有所有按钮权限
+				buttonQXnamelist = fhbuttonService.listAll(pd);                    // admin用户拥有所有增删改查权限
 			} else {
-				buttonQXnamelist = buttonrightsService.listAllBrAndQxname(pd);     // 此角色拥有的按钮权限标识列表
+				buttonQXnamelist = buttonrightsService.listAllBrAndQxname(pd);     // 此角色拥有的 增删改查权限 List
 			}
 			for (int i = 0; i < buttonQXnamelist.size(); i++) {
 				map.put(buttonQXnamelist.get(i).getString("QX_NAME"), "1");        // 按钮权限

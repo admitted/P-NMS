@@ -49,7 +49,7 @@
 		ORDER BY ROLE_ID
 	</select>
 	
-	<!-- 通过id查找 -->
+	<!-- 通过id查找角色信息 -->
 	<select id="findObjectById" parameterType="pd" resultType="pd">
 		select  
 		<include refid="Field"></include>
