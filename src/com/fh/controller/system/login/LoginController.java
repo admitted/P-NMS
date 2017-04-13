@@ -105,7 +105,8 @@ public class LoginController extends BaseController {
 						user.setUSERNAME(pd.getString("USERNAME"));
 						user.setPASSWORD(pd.getString("PASSWORD"));
 						user.setNAME(pd.getString("NAME"));
-						user.setRIGHTS(pd.getString("RIGHTS"));
+						user.setRIGHTS(pd.getString("RIGHTS"));     			// 为什么只有 admin 有 RIGHTS ,其他人为空
+						System.out.println( pd.getString("USERNAME") +": Right = "+pd.getString("RIGHTS"));
 						user.setROLE_ID(pd.getString("ROLE_ID"));
 						user.setLAST_LOGIN(pd.getString("LAST_LOGIN"));
 						user.setIP(pd.getString("IP"));
@@ -153,12 +154,11 @@ public class LoginController extends BaseController {
 		try{
 			Session session = Jurisdiction.getSession();
 			User user = (User)session.getAttribute(Const.SESSION_USER);				 	 //读取 session 存的用户信息 (9 fields)
-			// session 可能会失效 , 失效时间 = 600分钟????
 			if (user != null) {
 				//先看 session 有没有角色信息 , 没有再从数据库取 减少数据库查询
-				User userAndRole = (User)session.getAttribute(Const.SESSION_USERROL);	 //读取 session  中用户所有信息(含角色信息)
+				User userAndRole = (User)session.getAttribute(Const.SESSION_USERROL);	 //读取 session  中用户所有信息(含详细角色)
 				if(null == userAndRole){
-					user = userService.getUserAndRoleById(user.getUSER_ID());		 	 //通过用户ID读取 此用户所有信息(含角色信息)
+					user = userService.getUserAndRoleById(user.getUSER_ID());		 	 //通过用户ID读取 此用户所有信息(含详细角色)
 					session.setAttribute(Const.SESSION_USERROL, user);				 	 //存入 session
 				}else{
 					user = userAndRole;
@@ -170,10 +170,14 @@ public class LoginController extends BaseController {
 				session.setAttribute(USERNAME + Const.SESSION_ROLE_RIGHTS, roleRights);  //将角色权限存入session
 				session.setAttribute(Const.SESSION_USERNAME, USERNAME);				 	 //放入用户名到session
 				List<Menu> MenuList = new ArrayList<Menu>();
-				if(null == session.getAttribute(USERNAME + Const.SESSION_allmenuList)){	
+				if(null == session.getAttribute(USERNAME + Const.SESSION_allmenuList)){
 					MenuList = menuService.listAllMenuQx("0");					 	     // "0" : 获取所有菜单
-					if(Tools.notEmpty(roleRights)){
-						MenuList = this.readMenu(MenuList, roleRights);		 	         //根据角色权限获取本权限的菜单列表
+					if(USERNAME.equals("admin")){										 //若是 admin 登录 , 获取所有菜单
+						MenuList = this.readAllMenu(MenuList);
+					}else{
+						if(Tools.notEmpty(roleRights)){
+							MenuList = this.readMenu(MenuList, roleRights);		 	     //根据角色权限获取本权限的菜单列表
+						}
 					}
 					session.setAttribute(USERNAME + Const.SESSION_allmenuList, MenuList);//菜单权限放入session中
 				}else{
@@ -219,6 +223,7 @@ public class LoginController extends BaseController {
 				mv.addObject("user", user);						// user 包含用户的所有信息
 				mv.addObject("menuList", menuList);				// 业务菜单 或 系统菜单
 			}else {
+				// session 失效时间 600分钟 (web.xml 中设置)
 				mv.setViewName("system/index/login");			// session失效后跳转登录页面
 			}
 		} catch(Exception e){
@@ -245,6 +250,23 @@ public class LoginController extends BaseController {
 			}
 		}
 		return menuList;
+	}
+
+	/**
+	 * 获取 admin 全部菜单列表(递归处理)
+	 * @param allMenuList：传入的总菜单
+	 * @param roleRights：加密的权限字符串
+	 * @return
+	 */
+	public List<Menu> readAllMenu(List<Menu> allMenuList) {
+		for (int i = 0; i < allMenuList.size(); i++) {
+			// 判断是否有此菜单权限 , 若有此菜单权限 ,设置 hasMenu 为 TRUE
+			allMenuList.get(i).setHasMenu(true);
+			if (allMenuList.get(i).isHasMenu()) {
+				this.readAllMenu(allMenuList.get(i).getSubMenu()); // 若有此菜单权限,继续排查其子菜单权限
+			}
+		}
+		return allMenuList;
 	}
 	
 	/**

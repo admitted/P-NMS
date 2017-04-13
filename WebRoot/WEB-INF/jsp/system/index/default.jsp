@@ -35,7 +35,7 @@
                                 <i class="ace-icon fa fa-times"></i>
                             </button>
                             <i class="ace-icon fa fa-check green"></i>
-                            欢迎使用 PNMS 公安派出所网络警务系统&nbsp;&nbsp;
+                            欢迎使用 公安派出所网络警务系统&nbsp;&nbsp;
                             <strong class="green">
                                 &nbsp;QQ:876198439 CUI
                             </strong>

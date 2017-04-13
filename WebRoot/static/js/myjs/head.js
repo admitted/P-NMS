@@ -52,32 +52,13 @@ function getHeadMsg() {
             $.each(data.list, function (i, list) {
                 $("#user_info").html('<small>Welcome</small> ' + list.NAME + '');//登陆者资料
                 user = list.USERNAME;
-                USER_ID = list.USER_ID;		//用户ID
+                USER_ID = list.USER_ID;		            //用户ID
                 if (list.USERNAME != 'admin') {
-                    $("#systemset").hide();	//隐藏系统设置
+                    $("#systemset").hide();	            //隐藏系统设置
                 }
             });
-            fhsmsCount = Number(data.fhsmsCount);
-            $("#fhsmsCount").html(Number(fhsmsCount));	//站内信未读总数
-            TFHsmsSound = data.FHsmsSound;				//站内信提示音效
-            wimadress = data.wimadress;				//即时聊天服务器IP和端口
             oladress = data.oladress;					//在线管理和站内信服务器IP和端口
             online();									//连接在线
-        }
-    });
-}
-
-//获取站内信未读总数(在站内信删除未读新信件时调用此函数更新未读数)
-function getFhsmsCount() {
-    $.ajax({
-        type: "POST",
-        url: locat + '/head/getFhsmsCount.do?tm=' + new Date().getTime(),
-        data: encodeURI(""),
-        dataType: 'json',
-        cache: false,
-        success: function (data) {
-            fhsmsCount = Number(data.fhsmsCount);
-            $("#fhsmsCount").html(Number(fhsmsCount));	//站内信未读总数
         }
     });
 }
@@ -123,20 +104,6 @@ function online() {
 //下线
 function goOut(msg) {
     window.location.href = locat + "/logout.do?msg=" + msg;
-}
-
-//去通知收信人有站内信接收
-function fhsmsmsg(USERNAME) {
-    var arrUSERNAME = USERNAME.split(';');
-    for (var i = 0; i < arrUSERNAME.length; i++) {
-        websocket.send('[fhsms]' + arrUSERNAME[i]);//发送通知
-    }
-}
-
-//读取站内信时减少未读总数
-function readFhsms() {
-    fhsmsCount = Number(fhsmsCount) - 1;
-    $("#fhsmsCount").html(Number(fhsmsCount) <= 0 ? '0' : fhsmsCount);
 }
 
 //修改个人资料

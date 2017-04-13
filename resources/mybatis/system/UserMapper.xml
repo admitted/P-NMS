@@ -103,7 +103,7 @@
 		select  u.USER_ID,
 				u.USERNAME,
 				u.NAME,
-				u.RIGHTS as USER_RIGHTS,
+				u.RIGHTS,
 				u.PASSWORD,
 				u.SKIN,
 				r.ROLE_ID,
