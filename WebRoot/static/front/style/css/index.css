@@ -1,0 +1,447 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*mainbody*/
+.currTime {
+    background: url("../../images/currTime.jpg") no-repeat left center;
+    padding-left: 22px;
+    float: left;
+}
+
+.menubar {
+    background: #f9f9f9;
+    height: 32px;
+    line-height: 29px;
+    padding-left: 31px;
+}
+
+/*box1*/
+.box1 {
+    background: #fff;
+    padding: 24px;
+    height: 302px;
+    box-shadow: 0px 2px 1px #ccc;
+}
+
+.box2 {
+    background: #fff;
+    height: 302px;
+    min-height: 400px;
+    box-shadow: 0px 2px 1px #ccc;
+    background-image: url("../../images/subbg2.jpg");
+    background-position: left;
+    background-repeat: repeat-y;
+}
+
+/* 焦点图 水平滚动
+------------------------------ */
+.slide_x {
+    overflow: hidden;
+    position: relative;
+    margin: 0px auto;
+    width: 506px;
+    height: 310px;
+    background: #FFF;
+}
+
+.slide_x a {
+    color: #FFF;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 900
+}
+
+.slide_x .box {
+    overflow: hidden;
+    position: relative;
+    width: 506px;
+    height: 310px;
+}
+
+.slide_x .list {
+    overflow: hidden;
+    width: 9999px;
+}
+
+.slide_x .list li {
+    float: left;
+    position: relative;
+    width: 506px;
+}
+
+.slide_x .list img {
+    vertical-align: top;
+}
+
+.slide_x .list p {
+    line-height: 32px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 32px;
+    color: #FFF;
+    font-size: 12px;
+    text-indent: 12px;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#99000000', endColorstr='#99000000');
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.slide_x .btn {
+    overflow: hidden;
+    position: absolute;
+    bottom: 8px;
+    right: 6px;
+}
+
+.slide_x .btn li {
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin: 0 0 0 5px;
+    background: #eee;
+    color: #333;
+    font: 11px/16px Tahoma;
+    text-align: center;
+    cursor: pointer;
+}
+
+.slide_x .btn .selected {
+    background: #f30;
+    color: #fff;
+}
+
+.slide_x .minus,
+.slide_x .plus {
+    position: absolute;
+    top: 110px;
+    width: 40px;
+    height: 50px;
+    background-image: url("images/control.png");
+    background-repeat: no-repeat;
+    text-align: center;
+    cursor: pointer;
+}
+
+.slide_x .minus {
+    left: 0;
+    background-position: 0 0;
+}
+
+.slide_x .plus {
+    right: 0;
+    background-position: -40px 0;
+}
+
+.slide_x .minus:hover {
+    background-position: 0 -50px;
+}
+
+.slide_x .plus:hover {
+    background-position: -40px -50px;
+}
+
+/*box1C2*/
+.box1C2 {
+    width: 429px;
+}
+
+.winT {
+    border-bottom: 1px dotted #ccc;
+    height: 41px;
+    line-height: 41px
+}
+
+.winT h2 {
+    float: left;
+    font-family: "\9ED1\4F53";
+    color: #ae1e24;
+    background: url("../../images/winH.jpg" /*tpa=http://hf.ahga.gov.cn/res/images/winH.jpg*/) no-repeat left center;
+    font-size: 22px;
+    padding-left: 20px;
+}
+
+.more {
+    float: right;
+    color: #ccc;
+    font-size: 18px;
+}
+
+.winB {
+    padding-top: 12px;
+}
+
+.winB li {
+    background: url("../../images/liIcon.jpg") no-repeat left center;
+    padding-left: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden
+}
+
+.winB li a {
+    color: #5a5a5a;
+    font-size: 17px;
+    line-height: 36px;
+    height: 36px;
+    float: left;
+}
+
+.winB li span {
+    color: #5a5a5a;
+    font-size: 17px;
+    line-height: 36px;
+    height: 36px;
+    float: right;
+}
+
+.winB li a:hover {
+    color: #ae1e24
+}
+
+.win2 {
+    background: #fff;
+    margin-top: 18px;
+    margin-right: 18px;
+    width: 360px;
+}
+
+.winT2 {
+    padding: 0 18px;
+    height: 40px;
+    line-height: 40px;
+    background: #ca273b
+}
+
+.winT2 h2 {
+    float: left;
+    font-family: "\9ED1\4F53";
+    font-size: 20px;
+    color: #fff
+}
+
+.winT2 .more {
+    background: url("../../images/moreBg.jpg" /*tpa=http://hf.ahga.gov.cn/res/images/moreBg.jpg*/) no-repeat right center;
+    color: #4d010b;
+    font-size: 14px;
+    padding-right: 18px;
+}
+
+.win2 .winB {
+    border: 1px solid #e6e6e6;
+    border-top: none;
+    padding: 14px 20px;
+}
+
+.win2 .winB li {
+    width: 298px;
+}
+
+/*box2C3*/
+.box2C3T a {
+    display: inline-block;
+    background: #3969ba;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    padding: 6px 18px;
+    *padding-left: 17px;
+    *padding-right: 17px;
+    _padding-left: 15px;
+    _padding-right: 15px;
+    margin-bottom: 10px;
+}
+
+.box2C3 {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    margin-top: 18px;
+    width: 234px;
+    padding: 3px;
+    height: 277px;
+}
+
+.box2C30 {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    margin-top: 18px;
+    width: 234px;
+    padding: 3px;
+    height: 277px;
+    background: url("../../images/zwbg.jpg" /*tpa=http://hf.ahga.gov.cn/res/images/zwbg.jpg*/);
+    background-repeat: no-repeat;
+    background-color: rgb(255, 255, 255);
+}
+
+.box2C3B .winT {
+    height: 37px;
+    line-height: 37px;
+    padding-left: 10px;
+}
+
+.box2C3B .winT h2 {
+    font-size: 20px;
+}
+
+.box2C3B .winB li {
+    width: 213px;
+    font-size: 14px;
+    height: 39px;
+    line-height: 39px;
+    background: url("../../images/zwbg2.png" /*tpa=http://hf.ahga.gov.cn/res/images/zwbg2.png*/) no-repeat;
+    margin-left: 12px;
+    padding-left: 48px;
+    margin-top: 5px;
+}
+
+.box2C3B .winB li a {
+    color: #595959;
+    font-size: 14px;
+}
+
+.box2C3B .winB {
+    padding-top: 4px;
+}
+
+.box3 {
+    margin-top: 20px;
+}
+
+/*ad*/
+.ad {
+    background: #fff;
+    padding: 5px;
+}
+
+.wsfw {
+    width: 240px;
+}
+
+.rdad {
+    width: 240px;
+    height: 50px;
+}
+
+.jzxx {
+    width: 240px;
+    margin-top: 5px;
+}
+
+.jzxx dl dd a {
+    width: 116px;
+    height: 31px;
+    background: #3969ba;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    float: left;
+    margin-top: 5px;
+    padding-top: 5px;
+}
+
+.spad {
+    width: 240px;
+    height: 76px;
+    margin-top: 10px;
+}
+
+/*ztzl*/
+.ztzl {
+    padding-top: 0;
+    height: 277px;
+}
+
+.ztzl .winT h2 {
+    font-size: 18px;
+    font-family: '\5FAE\8F6F\96C5\9ED1';
+    font-weight: 600
+}
+
+.zlB {
+    border: 1px solid #e6e6e6;
+    width: 182px;
+    margin: 13px auto 0;
+    padding-top: 5px;
+}
+
+.zlB li {
+    padding-bottom: 10px;
+    text-align: center;
+    _padding-bottom: 6px;
+}
+
+/*linkImg*/
+.linkImg {
+    padding-top: 18px;
+    *padding-top: 9px;
+    _padding-top: 18px
+}
+
+.linkImg .fl {
+    padding-right: 25px;
+    _ padding-right: 27px;
+}
+
+/*link*/
+.link {
+    margin-top: 18px;
+    background: #fff;
+    border: 1px solid #e7e7e7;
+    padding: 12px;
+    padding-top: 0px;
+}
+
+.link .winT h2 {
+    font-size: 18px;
+}
+
+.linkB {
+    padding-top: 10px;
+    height: 26px;
+}
+
+.linkB select {
+    height: 26px;
+    border: 1px solid #d2d2d2;
+    width: 158px;
+    *width: 156px;
+}
+
+.linkB .fl {
+    margin-right: 5px;
+    *margin-right: 8px;
+    _margin-right: 6px;
+}
+
+/*2015-07-29站群导航*/
+.qlink {
+    width: 1000px;
+    background: #FFF;
+    margin: 0 auto;
+    height: 600px;
+    padding-top: 20px;
+}
+
+.map {
+    width: 430px;
+    padding-top: 20px;
+    margin: 0 auto;
+}
+
+.xxlink {
+    width: 550px;
+    margin: 0 auto;
+}
+
+.xxlinktop {
+    width: 550px;
+    margin: 0 auto;
+    height: 150px;
+}
+
+.xxlinknr {
+    width: 550px;
+    margin: 0 auto;
+    height: 400px;
+}

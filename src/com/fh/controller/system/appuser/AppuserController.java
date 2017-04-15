@@ -21,22 +21,25 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /** 
- * 类名称：会员管理
- * 创建人： CUI
- * 修改时间：2017年4月10日
- * @version
+ * 类名称：社区用户管理
+ * @author CUI
+ * @date 2017/4/10
+ * @version 1.3
  */
 @Controller
 @RequestMapping(value="/happuser")
 public class AppuserController extends BaseController {
 	
 	String menuUrl = "happuser/listUsers.do"; //菜单地址(权限用)
+
 	@Resource(name="appuserService")
 	private AppuserManager appuserService;
+
 	@Resource(name="roleService")
 	private RoleManager roleService;
 	
-	/**显示用户列表
+	/**
+	 * 显示用户列表
 	 * @param page
 	 * @return
 	 */
@@ -65,13 +68,14 @@ public class AppuserController extends BaseController {
 		return mv;
 	}
 	
-	/**去新增用户页面
+	/**
+	 * 去新增用户页面
 	 * @return
 	 * @throws Exception 
 	 */
 	@RequestMapping(value="/goAddU")
 	public ModelAndView goAddU() throws Exception{
-		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;}  //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
@@ -84,13 +88,14 @@ public class AppuserController extends BaseController {
 		return mv;
 	}
 	
-	/**保存用户
+	/**
+	 * 保存用户
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/saveU")
 	public ModelAndView saveU() throws Exception{
-		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;}  //校验权限
 		logBefore(logger, Jurisdiction.getUsername()+"新增会员");
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
@@ -110,7 +115,8 @@ public class AppuserController extends BaseController {
 		return mv;
 	}
 	
-	/**判断用户名是否存在
+	/**
+	 * 判断用户名是否存在
 	 * @return
 	 */
 	@RequestMapping(value="/hasU")
@@ -131,7 +137,8 @@ public class AppuserController extends BaseController {
 		return AppUtil.returnObject(new PageData(), map);
 	}
 	
-	/**判断邮箱是否存在
+	/**
+	 * 判断邮箱是否存在
 	 * @return
 	 */
 	@RequestMapping(value="/hasE")
@@ -152,7 +159,8 @@ public class AppuserController extends BaseController {
 		return AppUtil.returnObject(new PageData(), map);
 	}
 	
-	/**判断编码是否存在
+	/**
+	 * 判断编码是否存在
 	 * @return
 	 */
 	@RequestMapping(value="/hasN")
@@ -173,7 +181,8 @@ public class AppuserController extends BaseController {
 		return AppUtil.returnObject(new PageData(), map);
 	}
 	
-	/**删除用户
+	/**
+	 * 删除用户
 	 * @param out
 	 * @throws Exception 
 	 */
@@ -188,7 +197,8 @@ public class AppuserController extends BaseController {
 		out.close();
 	}
 	
-	/**修改用户
+	/**
+	 * 修改用户
 	 * @param out
 	 * @return
 	 * @throws Exception
@@ -209,7 +219,8 @@ public class AppuserController extends BaseController {
 		return mv;
 	}
 	
-	/**去修改用户页面
+	/**
+	 * 去修改用户页面
 	 * @return
 	 */
 	@RequestMapping(value="/goEditU")
@@ -232,7 +243,8 @@ public class AppuserController extends BaseController {
 		return mv;
 	}
 	
-	/**批量删除
+	/**
+	 * 批量删除
 	 * @return
 	 */
 	@RequestMapping(value="/deleteAllU")
@@ -263,7 +275,8 @@ public class AppuserController extends BaseController {
 		return AppUtil.returnObject(pd, map);
 	}
 	
-	/**导出会员信息到excel
+	/**
+	 * 导出会员信息到excel
 	 * @return
 	 */
 	@RequestMapping(value="/excel")

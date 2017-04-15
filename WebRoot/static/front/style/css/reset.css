@@ -1,0 +1,173 @@
+@charset "utf-8";
+/** 清除内外边距 **/
+body, h1, h2, h3, h4, h5, h6, hr, p,
+blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+form, input, fieldset, legend, button, /* form elements 表单元素 */
+th, td, /* table elements 表格元素 */
+img /* img elements 图片元素 */
+{
+    border: medium none;
+    margin: 0;
+    padding: 0;
+}
+
+/** 设置默认字体 **/
+body, button, input, select, textarea {
+    font: 12px/1.5 Arial, Helvetica, sans-serif, '\5FAE\8F6F\96C5\9ED1';
+    color: #333;
+}
+
+body {
+    background: #f5f4e2;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+}
+
+em {
+    font-style: normal;
+}
+
+/** 重置列表元素 **/
+ul, ol {
+    list-style: none;
+}
+
+/** 重置超链接元素 **/
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #cd0102;
+}
+
+/** 重置图片元素 **/
+img {
+    border: 0px;
+}
+
+/** 重置表格元素 **/
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+div {
+    display: block;
+}
+
+.clearfix {
+    clear: both;
+}
+
+/* CSS Document */
+.w1002 {
+    width: 1002px;
+    margin: 0 auto;
+}
+
+.fl {
+    float: left
+}
+
+.fr {
+    float: right
+}
+
+body {
+    background: #fafafa;
+    font-family: '\5FAE\8F6F\96C5\9ED1'
+}
+
+/*header*/
+.header {
+    background: url("../../images/headerBg.png" /*tpa=http://hf.ahga.gov.cn/res/images/headerBg.png*/) repeat-x;
+    height: 200px;
+}
+
+.logo {
+    padding-top: 43px;
+}
+
+.sear {
+    padding-top: 87px;
+}
+
+.searTxt, .searBtn {
+    float: left;
+}
+
+.searTxt {
+    background: #d1dcf6;
+    border: 1px solid #ae1e24;
+    color: #ae1e24;
+    width: 151px;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 15px;
+}
+
+.searBtn {
+    background: #ae1e24;
+    color: #fff;
+    height: 30px;
+    line-height: 30px;
+    width: 45px;
+    text-align: center;
+    cursor: pointer
+}
+
+/*menus*/
+.menu {
+    background: #ae1e24;
+    height: 50px;
+    line-height: 50px;
+}
+
+.menu li {
+    float: left
+}
+
+.menu li a {
+    display: inline-block;
+    font-size: 20px;
+    font-family: '黑体';
+    color: #fff;
+    font-weight: 900;
+    padding: 0 20px;
+    height: 50px;
+    line-height: 50px;
+}
+
+.menu .on a, .menu li a:hover {
+    background: url("../../images/menuOn.jpg" /*tpa=http://hf.ahga.gov.cn/res/images/menuOn.jpg*/) center bottom no-repeat;
+    color: #fff
+}
+
+/*mainbody*/
+.mainbody {
+    background: url("../../images/mainbodyBg.jpg" /*tpa=http://hf.ahga.gov.cn/res/images/mainbodyBg.jpg*/) repeat-x
+}
+
+/*footer*/
+.footer {
+    margin-top: 18px;
+    border-top: 5px solid #ca2c3f;
+    text-align: center;
+    padding: 10px 0
+}
+
+.footer p {
+    height: 24px;
+    line-height: 24px;
+}
+
+.footer strong a {
+    color: #ca2c3f
+}

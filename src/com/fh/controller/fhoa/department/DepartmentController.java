@@ -1,16 +1,12 @@
 package com.fh.controller.fhoa.department;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
+import com.fh.controller.base.BaseController;
+import com.fh.entity.Page;
+import com.fh.service.fhoa.department.DepartmentManager;
+import com.fh.util.AppUtil;
+import com.fh.util.Jurisdiction;
+import com.fh.util.PageData;
 import net.sf.json.JSONArray;
-
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,27 +17,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fh.controller.base.BaseController;
-import com.fh.entity.Page;
-import com.fh.util.AppUtil;
-import com.fh.util.PageData;
-import com.fh.util.Jurisdiction;
-import com.fh.service.fhoa.department.DepartmentManager;
+import javax.annotation.Resource;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /** 
- * 说明：组织机构
- * 创建人：FH Q313596790
- * 创建时间：2015-12-16
+ * 组织机构类
+ * @author cui
+ * @date 2015/10/6
+ * @version 1.2
  */
 @Controller
 @RequestMapping(value="/department")
 public class DepartmentController extends BaseController {
 	
 	String menuUrl = "department/list.do"; //菜单地址(权限用)
+
 	@Resource(name="departmentService")
 	private DepartmentManager departmentService;
 	
-	/**保存
+	/**
+	 * 保存
 	 * @param
 	 * @throws Exception
 	 */
@@ -83,7 +83,8 @@ public class DepartmentController extends BaseController {
 		return AppUtil.returnObject(new PageData(), map);
 	}
 	
-	/**修改
+	/**
+	 * 修改
 	 * @param
 	 * @throws Exception
 	 */
@@ -100,7 +101,8 @@ public class DepartmentController extends BaseController {
 		return mv;
 	}
 	
-	/**列表
+	/**
+	 * 列表
 	 * @param page
 	 * @throws Exception
 	 */
@@ -153,7 +155,8 @@ public class DepartmentController extends BaseController {
 		return mv;
 	}
 	
-	/**去新增页面
+	/**
+	 * 去新增页面
 	 * @param
 	 * @throws Exception
 	 */
@@ -171,7 +174,8 @@ public class DepartmentController extends BaseController {
 		return mv;
 	}	
 	
-	 /**去修改页面
+	 /**
+	  * 去修改页面
 	 * @param
 	 * @throws Exception
 	 */
@@ -192,7 +196,8 @@ public class DepartmentController extends BaseController {
 		return mv;
 	}	
 
-	/**判断编码是否存在
+	/**
+	 * 判断编码是否存在
 	 * @return
 	 */
 	@RequestMapping(value="/hasBianma")

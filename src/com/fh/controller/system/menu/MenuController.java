@@ -290,7 +290,7 @@ public class MenuController extends BaseController {
         for (int i = 0; i < menuList.size(); i++) {
             menuList.get(i).setHasMenu(RightsHelper.testRights(roleRights, menuList.get(i).getMENU_ID()));
             if (menuList.get(i).isHasMenu() && "1".equals(menuList.get(i).getMENU_STATE())) {    //判断是否有此菜单权限并且是否隐藏
-                this.readMenu(menuList.get(i).getSubMenu(), roleRights);                    //是：继续排查其子菜单
+                this.readMenu(menuList.get(i).getSubMenu(), roleRights);                         //是：继续排查其子菜单
             } else {
                 menuList.remove(i);
                 i--;

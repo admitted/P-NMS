@@ -120,11 +120,13 @@
 			/static/login/** 			= anon
 			/static/js/myjs/** 			= authc
 			/static/js/** 				= anon
+			/static/front/** 			= anon
 			/uploadFiles/uploadImgs/** 	= anon
 			/code.do 					= anon
 			/login_login	 			= anon
 			/app**/** 					= anon
 			/weixin/** 					= anon
+			/login.jsp					= anon
 			/**							= authc
 			</value>
 		</property>

@@ -39,8 +39,9 @@ import com.fh.service.information.pictures.PicturesManager;
 
 /** 
  * 类名称：图片管理
- * 创建人：FH Q313596790
- * 创建时间：2015-03-21
+ * @author cui
+ * @date 2016/1/6
+ * @version 1.2
  */
 @Controller
 @RequestMapping(value="/pictures")
@@ -50,7 +51,8 @@ public class PicturesController extends BaseController {
 	@Resource(name="picturesService")
 	private PicturesManager picturesService;
 	
-	/**列表
+	/**
+	 * 列表
 	 * @param page
 	 * @return
 	 * @throws Exception 
@@ -73,7 +75,8 @@ public class PicturesController extends BaseController {
 		return mv;
 	}
 	
-	/**新增
+	/**
+	 * 新增
 	 * @param file
 	 * @return
 	 * @throws Exception
@@ -109,7 +112,8 @@ public class PicturesController extends BaseController {
 		return AppUtil.returnObject(pd, map);
 	}
 	
-	/**删除
+	/**
+	 * 删除
 	 * @param out
 	 * @throws Exception 
 	 */
@@ -127,7 +131,8 @@ public class PicturesController extends BaseController {
 		out.close();
 	}
 	
-	/**修改
+	/**
+	 * 修改
 	 * @param request
 	 * @param file
 	 * @param tpz
@@ -176,7 +181,8 @@ public class PicturesController extends BaseController {
 		return mv;
 	}
 	
-	/**去新增页面
+	/**
+	 * 去新增页面
 	 * @return
 	 */
 	@RequestMapping(value="/goAdd")
@@ -189,7 +195,8 @@ public class PicturesController extends BaseController {
 		return mv;
 	}
 	
-	/**去修改页面
+	/**
+	 * 去修改页面
 	 * @return
 	 * @throws Exception 
 	 */
@@ -205,7 +212,8 @@ public class PicturesController extends BaseController {
 		return mv;
 	}	
 	
-	/**批量删除
+	/**
+	 * 批量删除
 	 * @return
 	 * @throws Exception 
 	 */
@@ -236,7 +244,8 @@ public class PicturesController extends BaseController {
 		return AppUtil.returnObject(pd, map);
 	}
 	
-	/**删除图片
+	/**
+	 * 删除图片
 	 * @param out
 	 * @throws Exception 
 	 */
@@ -253,7 +262,8 @@ public class PicturesController extends BaseController {
 		out.close();
 	}
 	
-	/**去图片爬虫页面
+	/**
+	 * 去图片爬虫页面
 	 * @return
 	 * @throws Exception 
 	 */
@@ -265,7 +275,7 @@ public class PicturesController extends BaseController {
 	}
 	
 	/**
-	 *	请求连接获取网页中每个图片的地址
+	 * 请求连接获取网页中每个图片的地址
 	 * @param args
 	 * @throws Exception
 	 */
