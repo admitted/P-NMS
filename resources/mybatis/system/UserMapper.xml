@@ -118,7 +118,7 @@
 		and u.USER_ID=#{USER_ID}
 	</select>
 	
-	<!-- 通过USERNAME获取数据 -->
+	<!-- 通过用户名USERNAME获取数据 -->
 	<select id="findByUsername" parameterType="pd" resultType="pd" >
 		select 
 			<include refid="Field"></include>

@@ -25,13 +25,10 @@
 	
 	<!-- 新增-->
 	<insert id="save" parameterType="pd">
-		insert into 
-	<include refid="tableName"></include>
-		(
-	<include refid="Field"></include>
-		) values (
-	<include refid="FieldValue"></include>
-		)
+		insert into  <include refid="tableName"></include>
+			(<include refid="Field"></include>)
+		values
+			( <include refid="FieldValue"></include> )
 	</insert>
 	
 	<!-- 删除-->

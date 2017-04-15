@@ -1,17 +1,12 @@
 package com.fh.controller.system.user;
 
-import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
-
+import com.fh.controller.base.BaseController;
+import com.fh.entity.Page;
+import com.fh.entity.system.Role;
+import com.fh.service.system.menu.MenuManager;
+import com.fh.service.system.role.RoleManager;
+import com.fh.service.system.user.UserManager;
+import com.fh.util.*;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -23,39 +18,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fh.controller.base.BaseController;
-import com.fh.entity.Page;
-import com.fh.entity.system.Role;
-import com.fh.service.system.menu.MenuManager;
-import com.fh.service.system.role.RoleManager;
-import com.fh.service.system.user.UserManager;
-import com.fh.util.AppUtil;
-import com.fh.util.Const;
-import com.fh.util.FileDownload;
-import com.fh.util.FileUpload;
-import com.fh.util.GetPinyin;
-import com.fh.util.Jurisdiction;
-import com.fh.util.ObjectExcelRead;
-import com.fh.util.PageData;
-import com.fh.util.ObjectExcelView;
-import com.fh.util.PathUtil;
-import com.fh.util.Tools;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /** 
  * 类名称：UserController
- * 创建人：FH fh313596790qq(青苔)
- * 更新时间：2015年11月3日
- * @version
+ * @author: cui
+ * @date： 2017/3/19
+ * @version: 1.2
  */
 @Controller
 @RequestMapping(value="/user")
 public class UserController extends BaseController {
 	
 	String menuUrl = "user/listUsers.do"; //菜单地址(权限用)
+
 	@Resource(name="userService")
 	private UserManager userService;
+
 	@Resource(name="roleService")
 	private RoleManager roleService;
+
 	@Resource(name="menuService")
 	private MenuManager menuService;
 	
@@ -75,7 +62,7 @@ public class UserController extends BaseController {
 		}
 		String lastLoginStart = pd.getString("lastLoginStart");	//开始时间
 		String lastLoginEnd = pd.getString("lastLoginEnd");		//结束时间
-		if(lastLoginStart != null && !"".equals(lastLoginStart)){
+		if(lastLoginStart != null && !"".equals(lastLoginStart)){ // 若不为空加入 pd
 			pd.put("lastLoginStart", lastLoginStart+" 00:00:00");
 		}
 		if(lastLoginEnd != null && !"".equals(lastLoginEnd)){

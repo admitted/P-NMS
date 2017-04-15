@@ -33,7 +33,7 @@ public interface UserManager {
 	 */
 	public User getUserAndRoleById(String USER_ID) throws Exception;
 	
-	/**通过USERNAEME获取数据
+	/**通过用户名USERNAEME获取数据
 	 * @param pd
 	 * @return
 	 * @throws Exception

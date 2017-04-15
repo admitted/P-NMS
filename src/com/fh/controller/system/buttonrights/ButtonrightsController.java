@@ -62,17 +62,17 @@ public class ButtonrightsController extends BaseController {
         }
         PageData fpd = new PageData();     //
         fpd.put("ROLE_ID", "0");
-        List<Role> roleList = roleService.listAllRolesByPId(fpd);           //列出组(角色组:公安警察组 社区用户组)
+        List<Role> roleList = roleService.listAllRolesByPId(fpd);           //列出全部角色组(角色组:公安警察组 社区用户组)
         List<Role> roleList_z = roleService.listAllRolesByPId(pd);          //列出此组下的角色
         List<PageData> buttonlist = fhbuttonService.listAll(pd);            //列出所有按钮 (导出,导入,站内信,邮件,短信等)
-        List<PageData> roleFhbuttonlist = buttonrightsService.listAll(pd);  //列出所有角色按钮关联数据
+        List<PageData> roleFhbuttonlist = buttonrightsService.listAll(pd);  //列出所有 角色 按钮 关联数据 ???
         pd = roleService.findObjectById(pd);                                //取得点击的角色组(横排的)
         mv.addObject("pd", pd);
         mv.addObject("roleList", roleList);
         mv.addObject("roleList_z", roleList_z);
         mv.addObject("buttonlist", buttonlist);
         mv.addObject("roleFhbuttonlist", roleFhbuttonlist);
-        mv.addObject("QX", Jurisdiction.getHC());    //按钮权限
+        mv.addObject("QX", Jurisdiction.getHC());                           //按钮权限
         mv.setViewName("system/buttonrights/buttonrights_list");
         return mv;
     }

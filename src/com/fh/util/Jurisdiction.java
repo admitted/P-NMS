@@ -35,8 +35,8 @@ public class Jurisdiction {
 	/**
 	 * 校验 校验此菜单menuUrl 权限
 	 * 并初始按钮权限 用于页面按钮显示与否 (递归处理)
-	 * @param allMenuList:传入的总菜单(设置菜单时，.do前面的不要重复)
-	 * @param menuUrl:访问地址
+	 * @param allMenuList:	传入的总菜单(设置菜单时，.do前面的不要重复)
+	 * @param menuUrl:		访问地址
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -44,7 +44,10 @@ public class Jurisdiction {
 		for(int i = 0; i < allMenuList.size() ; i++){
 			// 访问地址 与 所有菜单地址 循环匹配，若匹配到就进一步验证，没匹配到就不处理(可能是接口链接或其它链接)
 			if( allMenuList.get(i).getMENU_URL().split(".do")[0].equals(menuUrl.split(".do")[0]) ){
-				if(!allMenuList.get(i).isHasMenu()){		// 判断有无此菜单权限
+				/**
+				 * 某个用户可能会 可以显示多个菜单 但是没有这个菜单的增删改查的权限 也就无法对 业务进行操作
+				 */
+				if(!allMenuList.get(i).isHasMenu()){		// 判断当前用户 有无此菜单权限
 					return false;
 				}else{										// 按钮判断
 					// 此菜单的 menuUrl 按钮权限(增删改查)

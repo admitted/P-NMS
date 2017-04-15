@@ -22,7 +22,7 @@
 			<div class="page-content">
 				<div class="row">
 					<div class="col-xs-12">
-					
+					<!-- ${msg } 代表着从 add 来,还是从 edit 来 -->
 					<form action="fhbutton/${msg }.do" name="Form" id="Form" method="post">
 						<input type="hidden" name="FHBUTTON_ID" id="FHBUTTON_ID" value="${pd.FHBUTTON_ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">

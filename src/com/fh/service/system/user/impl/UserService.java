@@ -49,7 +49,7 @@ public class UserService implements UserManager{
 		return (User) dao.findForObject("UserMapper.getUserAndRoleById", USER_ID);
 	}
 	
-	/**通过USERNAEME获取数据
+	/**通过用户名USERNAEME获取数据
 	 * @param pd
 	 * @return
 	 * @throws Exception

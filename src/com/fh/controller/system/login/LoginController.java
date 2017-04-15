@@ -73,6 +73,7 @@ public class LoginController extends BaseController {
 	
 	/**
 	 * 请求登录，验证用户
+	 * 将用户有用信息放入 session 中 (ID,NAME,PASSWORD,RIGHTS,ROLE_ID等9个)
 	 * @return
 	 * @throws Exception
 	 */
@@ -84,10 +85,10 @@ public class LoginController extends BaseController {
 		String errInfo = "";
 		String KEYDATA[] = pd.getString("KEYDATA").replaceAll("qq876198439cui", "").split(",");
 		if(null != KEYDATA && KEYDATA.length == 3){
-			Session session = Jurisdiction.getSession(); //获取shiro管理的会话session
+			Session session = Jurisdiction.getSession();
 			String sessionCode = (String)session.getAttribute(Const.SESSION_SECURITY_CODE); //获取session中的验证码
 			String code = KEYDATA[2];
-			if(null == code || "".equals(code)){//判断效验码是否为空
+			if(null == code || "".equals(code)){
 				errInfo = "nullcode";
 			}else{
 				String USERNAME  = KEYDATA[0];	//登录过来的用户名
@@ -105,8 +106,7 @@ public class LoginController extends BaseController {
 						user.setUSERNAME(pd.getString("USERNAME"));
 						user.setPASSWORD(pd.getString("PASSWORD"));
 						user.setNAME(pd.getString("NAME"));
-						user.setRIGHTS(pd.getString("RIGHTS"));     			// 为什么只有 admin 有 RIGHTS ,其他人为空
-						System.out.println( pd.getString("USERNAME") +": Right = "+pd.getString("RIGHTS"));
+						user.setRIGHTS(pd.getString("RIGHTS"));     			// sys_user 表中的 RIGHTS
 						user.setROLE_ID(pd.getString("ROLE_ID"));
 						user.setLAST_LOGIN(pd.getString("LAST_LOGIN"));
 						user.setIP(pd.getString("IP"));
@@ -142,7 +142,8 @@ public class LoginController extends BaseController {
 	}
 	
 	/**
-	 * 访问系统首页
+	 * 登录验证成功后 , 访问系统首页
+	 * 用户角色中有 访问菜单权限 RIGHTS 和 每个菜单的增删改查(ADD_QX,DEL_QX,EDIT_QX,CHA_QX)
 	 * @param changeMenu：切换菜单参数
 	 * @return
 	 */
@@ -166,9 +167,9 @@ public class LoginController extends BaseController {
 				// 以下的 user 包含用户的所有信息
 				String USERNAME = user.getUSERNAME();
 				Role role = user.getRole();											 	 //获取用户角色
-				String roleRights = ((role != null) ? role.getRIGHTS() : "");		 	 //角色权限(菜单权限)
-				session.setAttribute(USERNAME + Const.SESSION_ROLE_RIGHTS, roleRights);  //将角色权限存入session
-				session.setAttribute(Const.SESSION_USERNAME, USERNAME);				 	 //放入用户名到session
+				String roleRights = ((role != null) ? role.getRIGHTS() : "");		 	 //获取用户角色中的权限(菜单权限)
+				session.setAttribute(USERNAME + Const.SESSION_ROLE_RIGHTS, roleRights);  //将用户角色权限存入session
+				session.setAttribute(Const.SESSION_USERNAME, USERNAME);				 	 //将用户名存入session
 				List<Menu> MenuList = new ArrayList<Menu>();
 				if(null == session.getAttribute(USERNAME + Const.SESSION_allmenuList)){
 					MenuList = menuService.listAllMenuQx("0");					 	     // "0" : 获取所有菜单
@@ -176,7 +177,7 @@ public class LoginController extends BaseController {
 						MenuList = this.readAllMenu(MenuList);
 					}else{
 						if(Tools.notEmpty(roleRights)){
-							MenuList = this.readMenu(MenuList, roleRights);		 	     //根据角色权限获取本权限的菜单列表
+							MenuList = this.readMenu(MenuList, roleRights);		 	     //根据用户的角色的权限获取相应菜单列表
 						}
 					}
 					session.setAttribute(USERNAME + Const.SESSION_allmenuList, MenuList);//菜单权限放入session中
@@ -243,7 +244,7 @@ public class LoginController extends BaseController {
 	 */
 	public List<Menu> readMenu(List<Menu> menuList, String roleRights) {
 		for (int i = 0; i < menuList.size(); i++) {
-			// 判断是否有此菜单权限 , 若有此菜单权限 ,设置 hasMenu 为 TRUE
+			// 判断当前用户 是否有此菜单权限 , 若有此菜单权限 ,设置 hasMenu 为 TRUE
 			menuList.get(i).setHasMenu(RightsHelper.testRights(roleRights, menuList.get(i).getMENU_ID()));
 			if (menuList.get(i).isHasMenu()) {
 				this.readMenu(menuList.get(i).getSubMenu(), roleRights); // 若有此菜单权限,继续排查其子菜单权限
@@ -325,7 +326,7 @@ public class LoginController extends BaseController {
 	}
 	
 	/**
-	 * 获取用户权限 (CRUD)
+	 * 获取用户权限 QX(CRUD)
 	 * @return
 	 */
 	public Map<String, String> getUQX(String USERNAME) {
@@ -333,12 +334,13 @@ public class LoginController extends BaseController {
 		Map<String, String> map = new HashMap<String, String>();
 		try {
 			pd.put(Const.SESSION_USERNAME, USERNAME);
-			pd.put("ROLE_ID", userService.findByUsername(pd).get("ROLE_ID").toString());// 获取角色ID
+			pd.put("ROLE_ID", userService.findByUsername(pd).get("ROLE_ID").toString());// 根据 用户名 admin 获取角色ID
 			pd = roleService.findObjectById(pd);                                        // 获取角色信息
 			map.put("adds",  pd.getString("ADD_QX"));    // 增
 			map.put("dels",  pd.getString("DEL_QX"));    // 删
 			map.put("edits", pd.getString("EDIT_QX"));   // 改
 			map.put("chas",  pd.getString("CHA_QX"));    // 查
+			// 按钮权限 (导出,导入,站内信,短信,邮件)
 			List<PageData> buttonQXnamelist = new ArrayList<PageData>();
 			if ("admin".equals(USERNAME)) {
 				buttonQXnamelist = fhbuttonService.listAll(pd);                    // admin用户拥有所有增删改查权限
