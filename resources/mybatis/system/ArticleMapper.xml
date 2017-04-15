@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ArticleMapper">
+
+	<resultMap type="Article" id="ArticleResultMap">
+		<id column="ARTICLE_ID" property="ARTICLE_ID"/>
+		<result column="CATEGORY" property="CATEGORY"/>
+		<result column="AUTHOR" property="AUTHOR"/>
+		<result column="TITLE" property="TITLE"/>
+		<result column="CONTENT" property="CONTENT"/>
+		<result column="LAST_EDIT" property="LAST_EDIT"/>
+		<result column="STATUS" property="STATUS"/>
+	</resultMap>
+	
+	<!--表名 -->
+	<sql id="tableName">
+		ARTICLE
+	</sql>
+
+	<!-- 字段 -->
+	<sql id="Field">
+		ARTICLE_ID,
+		CATEGORY,
+		AUTHOR,
+		TITLE,
+		CONTENT,
+		LAST_EDIT,
+		STATUS
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{ARTICLE_ID},
+		#{CATEGORY},
+		#{AUTHOR},
+		#{TITLE},
+		#{CONTENT},
+		#{LAST_EDIT},
+		#{STATUS}
+	</sql>
+	
+	<!-- 根据文章 ID 获取文章内容-->
+	<select id="getArticleByID" parameterType="pd" resultType="pd">
+		select <include refid="Field"></include> from
+		<include refid="tableName"></include>
+		where ARTICLE_ID = #{ARTICLE_ID}
+	</select>
+	
+	<!-- 列出某分类下的所有文章 -->
+	<select id="listAllArticlesByCategory"  parameterType="pd" resultType="pd" >
+        select <include refid="Field"></include> from
+        <include refid="tableName"></include>
+		where CATEGORY = #{CATEGORY}
+	</select>
+	
+	<!-- 用户列表 -->
+	<select id="userlistPage" parameterType="page" resultType="pd" >
+		select  u.USER_ID,
+				u.USERNAME,
+				u.PASSWORD,
+				u.LAST_LOGIN,
+				u.NAME,
+				u.IP,
+				u.EMAIL,
+				u.NUMBER,
+				u.PHONE,
+				r.ROLE_ID,
+				r.ROLE_NAME
+		from <include refid="tableName"></include> u, <include refid="roleTableName"></include> r 
+		where u.ROLE_ID = r.ROLE_ID 
+		and u.USERNAME != 'admin'
+		and r.PARENT_ID = '1'
+		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+			and
+				(
+					 u.USERNAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					 u.EMAIL LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+					 or
+					 u.NUMBER LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or
+					 u.NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or
+					 u.PHONE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				)
+		</if>
+		<if test="pd.ROLE_ID != null and pd.ROLE_ID != ''"><!-- 角色检索 -->
+			and u.ROLE_ID=#{pd.ROLE_ID} 
+		</if>
+		<if test="pd.lastLoginStart!=null and pd.lastLoginStart!=''"><!-- 登录时间检索 -->
+			and u.LAST_LOGIN &gt;= #{pd.lastLoginStart} 
+		</if>
+		<if test="pd.lastLoginEnd!=null and pd.lastLoginEnd!=''"><!-- 登录时间检索 -->
+			and u.LAST_LOGIN &lt;= #{pd.lastLoginEnd} 
+		</if>
+		order by u.LAST_LOGIN desc
+	</select>
+
+	<!-- 新增文章 -->
+	<insert id="saveArticle" parameterType="pd" >
+		insert into <include refid="tableName"></include> (
+			<include refid="Field"></include>
+		) values (
+			<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 修改文章 -->
+	<update id="editArticle" parameterType="pd" >
+		update  <include refid="tableName"></include>
+			set CATEGORY 			= #{CATEGORY},
+                AUTHOR 				= #{AUTHOR},
+                TITLE				= #{TITLE},
+                CONTENT				= #{CONTENT},
+                LAST_EDIT			= #{LAST_EDIT},
+                STATUS				= #{STATUS}
+			where
+				ARTICLE_ID = #{ARTICLE_ID}
+	</update>
+	
+	<!-- 删除文章 -->
+	<delete id="deleteArticle" parameterType="pd" flushCache="false">
+		delete from <include refid="tableName"></include>
+		where
+            ARTICLE_ID = #{ARTICLE_ID}
+	</delete>
+	
+	<!-- 批量删除文章 -->
+	<delete id="deleteAllArticle" parameterType="String" >
+		delete from <include refid="tableName"></include>
+		where 
+			ARTICLE_ID in
+  			 <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                  #{item}
+             </foreach>
+	</delete>
+	
+	<!-- 文章列表(全部) -->
+	<select id="listAllArticle" parameterType="pd" resultType="pd" >
+        select <include refid="Field"></include> from
+        from <include refid="tableName"></include>
+	</select>
+	
+	<!-- 获取总数 -->
+	<select id="getArticleCount" parameterType="String" resultType="pd">
+		select 
+			count(ARTICLE_ID) articleCount
+		from 
+		<include refid="tableName"></include>
+	</select>
+	
+</mapper>
