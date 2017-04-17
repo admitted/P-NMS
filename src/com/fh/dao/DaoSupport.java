@@ -84,7 +84,7 @@ public class DaoSupport implements DAO {
     }
 
     /**
-     * 删除对象 一个
+     * 删除对象
      * @param str
      * @param obj
      * @return

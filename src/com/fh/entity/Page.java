@@ -76,7 +76,7 @@ public class Page {
 	// 拼接分页 页面及JS函数
 	public String getPageStr() {
 		StringBuffer sb = new StringBuffer();
-		if(totalResult>0){
+		if(totalResult>0){  // 总记录数大于 0
 			sb.append("	<ul class=\"pagination pull-right no-margin\">\n");
 			if(currentPage==1){
 				sb.append("	<li><a>共<font color=red>"+ totalResult +"</font>条</a></li>\n");

@@ -1,21 +1,19 @@
 package com.fh.service.system.user.impl;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Service;
-
 import com.fh.dao.DaoSupport;
 import com.fh.entity.Page;
 import com.fh.entity.system.User;
 import com.fh.service.system.user.UserManager;
 import com.fh.util.PageData;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 
 /** 系统用户
- * @author fh313596790qq(青苔)
- * 修改时间：2015.11.2
+ * @author CUI QQ876198439
+ * @date 2015/11/2
  */
 @Service("userService")
 public class UserService implements UserManager{
@@ -23,7 +21,8 @@ public class UserService implements UserManager{
 	@Resource(name = "daoSupport")
 	private DaoSupport dao;
 	
-	/**登录判断
+	/**
+	 * 登录判断
 	 * @param pd
 	 * @return
 	 * @throws Exception
@@ -32,7 +31,8 @@ public class UserService implements UserManager{
 		return (PageData)dao.findForObject("UserMapper.getUserInfo", pd);
 	}
 	
-	/**更新登录时间
+	/**
+	 * 更新登录时间
 	 * @param pd
 	 * @throws Exception
 	 */
@@ -40,7 +40,8 @@ public class UserService implements UserManager{
 		dao.update("UserMapper.updateLastLogin", pd);
 	}
 	
-	/**通过用户ID获取用户信息和角色信息
+	/**
+	 * 通过用户ID获取用户信息和角色信息
 	 * @param USER_ID
 	 * @return
 	 * @throws Exception
@@ -49,7 +50,8 @@ public class UserService implements UserManager{
 		return (User) dao.findForObject("UserMapper.getUserAndRoleById", USER_ID);
 	}
 	
-	/**通过用户名USERNAEME获取数据
+	/**
+	 * 通过用户名USERNAEME获取数据
 	 * @param pd
 	 * @return
 	 * @throws Exception
@@ -58,7 +60,8 @@ public class UserService implements UserManager{
 		return (PageData)dao.findForObject("UserMapper.findByUsername", pd);
 	}
 	
-	/**列出某角色下的所有用户
+	/**
+	 * 列出某角色下的所有用户
 	 * @param pd
 	 * @return
 	 * @throws Exception
@@ -69,7 +72,8 @@ public class UserService implements UserManager{
 		
 	}
 	
-	/**保存用户IP
+	/**
+	 * 保存用户IP
 	 * @param pd
 	 * @throws Exception
 	 */
@@ -77,7 +81,8 @@ public class UserService implements UserManager{
 		dao.update("UserMapper.saveIP", pd);
 	}
 	
-	/**用户列表
+	/**
+	 * 用户列表
 	 * @param page
 	 * @return
 	 * @throws Exception
@@ -87,7 +92,8 @@ public class UserService implements UserManager{
 		return (List<PageData>) dao.findForList("UserMapper.userlistPage", page);
 	}
 	
-	/**通过邮箱获取数据
+	/**
+	 * 通过邮箱获取数据
 	 * @param pd
 	 * @return
 	 * @throws Exception
@@ -96,7 +102,8 @@ public class UserService implements UserManager{
 		return (PageData)dao.findForObject("UserMapper.findByUE", pd);
 	}
 	
-	/**通过编号获取数据
+	/**
+	 * 通过编号获取数据
 	 * @param pd
 	 * @return
 	 * @throws Exception
@@ -105,7 +112,8 @@ public class UserService implements UserManager{
 		return (PageData)dao.findForObject("UserMapper.findByUN", pd);
 	}
 	
-	/**通过id获取数据
+	/**
+	 * 通过id获取数据
 	 * @param pd
 	 * @return
 	 * @throws Exception
@@ -114,7 +122,8 @@ public class UserService implements UserManager{
 		return (PageData)dao.findForObject("UserMapper.findById", pd);
 	}
 	
-	/**保存用户
+	/**
+	 * 保存用户
 	 * @param pd
 	 * @throws Exception
 	 */
@@ -122,7 +131,8 @@ public class UserService implements UserManager{
 		dao.save("UserMapper.saveU", pd);
 	}
 	 
-	/**修改用户
+	/**
+	 * 修改用户
 	 * @param pd
 	 * @throws Exception
 	 */
@@ -130,7 +140,8 @@ public class UserService implements UserManager{
 		dao.update("UserMapper.editU", pd);
 	}
 	
-	/**删除用户
+	/**
+	 * 删除用户
 	 * @param pd
 	 * @throws Exception
 	 */
@@ -138,7 +149,8 @@ public class UserService implements UserManager{
 		dao.delete("UserMapper.deleteU", pd);
 	}
 	
-	/**批量删除用户
+	/**
+	 * 批量删除用户
 	 * @param USER_IDS
 	 * @throws Exception
 	 */
@@ -146,8 +158,9 @@ public class UserService implements UserManager{
 		dao.delete("UserMapper.deleteAllU", USER_IDS);
 	}
 	
-	/**用户列表(全部)
-	 * @param USER_IDS
+	/**
+	 * 用户列表(全部)
+	 * @param pd
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
@@ -155,8 +168,9 @@ public class UserService implements UserManager{
 		return (List<PageData>) dao.findForList("UserMapper.listAllUser", pd);
 	}
 	
-	/**获取总数
-	 * @param pd
+	/**
+	 * 获取总数
+	 * @param value
 	 * @throws Exception
 	 */
 	public PageData getUserCount(String value)throws Exception{

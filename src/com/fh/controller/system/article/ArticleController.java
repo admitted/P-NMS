@@ -4,7 +4,6 @@ import com.fh.controller.base.BaseController;
 import com.fh.entity.Page;
 import com.fh.service.system.article.ArticleManager;
 import com.fh.util.*;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -36,35 +35,35 @@ public class ArticleController extends BaseController {
 	private ArticleManager articleService;
 
 	/**
-     * 显示文章列表
+     * 显示分类文章列表
 	 * @param page
 	 * @return
 	 * @throption
 	 */
 	@RequestMapping(value="/listArticles")
 	public ModelAndView listArticles(Page page)throws Exception{
+		logBefore(logger, Jurisdiction.getUsername()+" >> 显示 category article");
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		String keywords = pd.getString("keywords");				//关键词检索条件
+		String keywords = pd.getString("keywords");					// 关键词检索条件
 		if(null != keywords && !"".equals(keywords)){
 			pd.put("keywords", keywords.trim());
 		}
-		String lastEditStart = pd.getString("lastEditStart");	//开始时间
-		String lastEditEnd = pd.getString("lastEditEnd");		//结束时间
-		if(lastEditStart != null && !"".equals(lastEditStart)){ // 若不为空加入 pd
+		String lastEditStart = pd.getString("lastEditStart");		// 开始时间
+		String lastEditEnd = pd.getString("lastEditEnd");			// 结束时间
+		if(lastEditStart != null && !"".equals(lastEditStart)){ 	// 若不为空加入 pd
 			pd.put("lastEditStart", lastEditStart+" 00:00:00");
 		}
 		if(lastEditEnd != null && !"".equals(lastEditEnd)){
 			pd.put("lastEditEnd", lastEditEnd+" 00:00:00");
 		} 
 		page.setPd(pd);
-		List<PageData>	articleList = articleService.listAllArticlesByCategory(pd);	 //文章列表
-		pd.put("ROLE_ID", "1");
-		mv.setViewName("system/article/articleList");
+		List<PageData> articleList = articleService.articlelistPageByCategory(page);	 //文章列表
+		mv.setViewName("system/article/article_list");
 		mv.addObject("articleList", articleList);
 		mv.addObject("pd", pd);
-		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
+		mv.addObject("QX",Jurisdiction.getHC());					// 按钮权限
 		return mv;
 	}
 	
@@ -111,24 +110,23 @@ public class ArticleController extends BaseController {
 	public ModelAndView saveArticle() throws Exception{
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
 		logBefore(logger, Jurisdiction.getUsername()+" >> 新增 article");
+        Map<String,String> map = new HashMap<String,String>();
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
-		pd = this.getPageData();
-		pd.put("USER_ID", this.get32UUID());	//ID 主键
-		pd.put("LAST_LOGIN", "");				//最后登录时间
-		pd.put("IP", "");						//IP
-		pd.put("STATUS", "0");					//状态
-		pd.put("SKIN", "default");
-		pd.put("RIGHTS", "");		
-		pd.put("PASSWORD", new SimpleHash("SHA-1", pd.getString("USERNAME"), pd.getString("PASSWORD")).toString());	//密码加密
-        articleService.saveArticle(pd); 	    //执行保存
-        mv.addObject("msg","success");
-		mv.setViewName("save_result");
-		return mv;
+        pd = this.getPageData();
+        pd.put("ARTICLE_ID", this.get32UUID());	// 文章ID 主键
+        pd.put("STATUS", "1");					// 发布状态  默认1:发布   (0:表示暂时不发布 1:立即发布)
+
+        articleService.saveArticle(pd); 	    // 执行保存    出错的话后续步奏没有执行
+        mv.setViewName("system/article/article_edit");
+        mv.addObject("msg", "saveArticle");     // 注意这个 msg 的值
+        mv.addObject("pd", pd);
+        System.out.println("I'm here!");
+        return mv;
 	}
 	
 	/**
-	 * 查看文章
+	 * 获取单篇文章详细信息
 	 * @return
 	 * @throws Exception
 	 */
@@ -144,7 +142,27 @@ public class ArticleController extends BaseController {
 		mv.addObject("pd", pd);
 		return mv;
 	}
-	
+
+	/**
+	 * 去修改文章页面
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/goEditArticle")
+	public ModelAndView goEditArticle() throws Exception {
+		if (!Jurisdiction.buttonJurisdiction(menuUrl, "edit")) {
+			return null;
+		} //校验权限
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		pd = articleService.getArticleByID(pd);                   //根据ID读取
+		mv.setViewName("system/article/article_edit");
+		mv.addObject("msg", "editArticle");
+		mv.addObject("pd", pd);
+		return mv;
+	}
+
 	/**
 	 * 修改文章
 	 */
@@ -178,6 +196,7 @@ public class ArticleController extends BaseController {
 		String ARTICLE_IDS = pd.getString("ARTICLE_IDS");
 		if(null != ARTICLE_IDS && !"".equals(ARTICLE_IDS)){
 			String ArrayARTICLE_IDS[] = ARTICLE_IDS.split(",");
+			System.out.println("ARTICLE_IDS = "+ARTICLE_IDS);
 			articleService.deleteAllArticles(ArrayARTICLE_IDS);
 			pd.put("msg", "ok");
 		}else{

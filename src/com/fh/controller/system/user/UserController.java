@@ -83,7 +83,6 @@ public class UserController extends BaseController {
 
     /**
      * 删除用户
-     *
      * @param out
      * @throws Exception
      */
@@ -92,7 +91,7 @@ public class UserController extends BaseController {
         if (!Jurisdiction.buttonJurisdiction(menuUrl, "del")) {
             return;
         } //校验权限
-        logBefore(logger, Jurisdiction.getUsername() + "删除user");
+        logBefore(logger, Jurisdiction.getUsername() + " >> 删除 user");
         PageData pd = new PageData();
         pd = this.getPageData();
         userService.deleteU(pd);
@@ -132,7 +131,7 @@ public class UserController extends BaseController {
         if (!Jurisdiction.buttonJurisdiction(menuUrl, "add")) {
             return null;
         } //校验权限
-        logBefore(logger, Jurisdiction.getUsername() + "新增user");
+        logBefore(logger, Jurisdiction.getUsername() + " >> 新增 user");
         ModelAndView mv = this.getModelAndView();
         PageData pd = new PageData();
         pd = this.getPageData();
@@ -239,7 +238,7 @@ public class UserController extends BaseController {
         pd.put("ROLE_ID", "1");
         List<Role> roleList = roleService.listAllRolesByPId(pd);    //列出所有系统用户角色
         mv.addObject("fx", "user");
-        pd = userService.findById(pd);                                //根据ID读取
+        pd = userService.findById(pd);                              //根据ID读取
         mv.setViewName("system/user/user_edit");
         mv.addObject("msg", "editU");
         mv.addObject("pd", pd);
@@ -359,7 +358,7 @@ public class UserController extends BaseController {
         if (!Jurisdiction.buttonJurisdiction(menuUrl, "del")) {
             return null;
         } //校验权限
-        logBefore(logger, Jurisdiction.getUsername() + "批量删除user");
+        logBefore(logger, Jurisdiction.getUsername() + " >> 批量删除 user");
         PageData pd = new PageData();
         Map<String, Object> map = new HashMap<String, Object>();
         pd = this.getPageData();

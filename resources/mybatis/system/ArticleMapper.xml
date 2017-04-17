@@ -48,53 +48,31 @@
 	</select>
 	
 	<!-- 列出某分类下的所有文章 -->
-	<select id="listAllArticlesByCategory"  parameterType="pd" resultType="pd" >
-        select <include refid="Field"></include> from
-        <include refid="tableName"></include>
-		where CATEGORY = #{CATEGORY}
-	</select>
-	
-	<!-- 用户列表 -->
-	<select id="userlistPage" parameterType="page" resultType="pd" >
-		select  u.USER_ID,
-				u.USERNAME,
-				u.PASSWORD,
-				u.LAST_LOGIN,
-				u.NAME,
-				u.IP,
-				u.EMAIL,
-				u.NUMBER,
-				u.PHONE,
-				r.ROLE_ID,
-				r.ROLE_NAME
-		from <include refid="tableName"></include> u, <include refid="roleTableName"></include> r 
-		where u.ROLE_ID = r.ROLE_ID 
-		and u.USERNAME != 'admin'
-		and r.PARENT_ID = '1'
-		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
-			and
+	<select id="articlelistPageByCategory"  parameterType="page" resultType="pd" >
+        select
+			<include refid="Field"></include>
+		from
+        	<include refid="tableName"></include>
+		where
+			CATEGORY = #{pd.CATEGORY}
+
+			<if test="pd.keywords!= null and pd.keywords != ''">		<!-- 关键词检索 -->
+				and
 				(
-					 u.USERNAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
-					 or 
-					 u.EMAIL LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
-					 or
-					 u.NUMBER LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
-					 or
-					 u.NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
-					 or
-					 u.PHONE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					TITLE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				or
+					AUTHOR LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				or
+					CONTENT LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 				)
-		</if>
-		<if test="pd.ROLE_ID != null and pd.ROLE_ID != ''"><!-- 角色检索 -->
-			and u.ROLE_ID=#{pd.ROLE_ID} 
-		</if>
-		<if test="pd.lastLoginStart!=null and pd.lastLoginStart!=''"><!-- 登录时间检索 -->
-			and u.LAST_LOGIN &gt;= #{pd.lastLoginStart} 
-		</if>
-		<if test="pd.lastLoginEnd!=null and pd.lastLoginEnd!=''"><!-- 登录时间检索 -->
-			and u.LAST_LOGIN &lt;= #{pd.lastLoginEnd} 
-		</if>
-		order by u.LAST_LOGIN desc
+			</if>
+			<if test="pd.lastEditStart!=null and pd.lastEditStart!=''">	<!-- 最后编辑时间检索 -->
+				and LAST_EDIT &gt;= #{pd.lastEditStart}
+			</if>
+			<if test="pd.lastEditEnd!=null and pd.lastEditEnd!=''">		<!-- 最后编辑时间检索 -->
+				and LAST_EDIT &lt;= #{pd.lastEditEnd}
+			</if>
+		order by LAST_EDIT desc
 	</select>
 
 	<!-- 新增文章 -->
@@ -127,7 +105,7 @@
 	</delete>
 	
 	<!-- 批量删除文章 -->
-	<delete id="deleteAllArticle" parameterType="String" >
+	<delete id="deleteAllArticles" parameterType="String" >
 		delete from <include refid="tableName"></include>
 		where 
 			ARTICLE_ID in
@@ -137,7 +115,7 @@
 	</delete>
 	
 	<!-- 文章列表(全部) -->
-	<select id="listAllArticle" parameterType="pd" resultType="pd" >
+	<select id="listAllArticles" parameterType="pd" resultType="pd" >
         select <include refid="Field"></include> from
         from <include refid="tableName"></include>
 	</select>

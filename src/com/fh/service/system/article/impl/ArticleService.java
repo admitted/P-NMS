@@ -1,6 +1,7 @@
 package com.fh.service.system.article.impl;
 
 import com.fh.dao.DaoSupport;
+import com.fh.entity.Page;
 import com.fh.service.system.article.ArticleManager;
 import com.fh.util.PageData;
 import org.springframework.stereotype.Service;
@@ -33,13 +34,13 @@ public class ArticleService implements ArticleManager {
 
     /**
      * 获取分类下的所有文章
-     * @param pd
+     * @param page
      * @return
      * @throws Exception
      */
 	@Override
-	public List<PageData> listAllArticlesByCategory(PageData pd) throws Exception {
-		return ( List <PageData>)dao.findForObject("ArticleMapper.listAllArticlesByCategory", pd);
+	public List<PageData> articlelistPageByCategory(Page page) throws Exception {
+		return ( List <PageData>)dao.findForList("ArticleMapper.articlelistPageByCategory", page);
 	}
 
     /**
@@ -49,7 +50,7 @@ public class ArticleService implements ArticleManager {
      */
 	@Override
 	public void saveArticle(PageData pd) throws Exception {
-        dao.findForObject("ArticleMapper.saveArticle", pd);
+        dao.save("ArticleMapper.saveArticle", pd);
 	}
 
     /**
@@ -59,7 +60,7 @@ public class ArticleService implements ArticleManager {
      */
 	@Override
 	public void editArticle(PageData pd) throws Exception {
-        dao.findForObject("ArticleMapper.editArticle", pd);
+        dao.update("ArticleMapper.editArticle", pd);
 	}
 
     /**
@@ -69,7 +70,7 @@ public class ArticleService implements ArticleManager {
      */
 	@Override
 	public void deleteArticle(PageData pd) throws Exception {
-        dao.findForObject("ArticleMapper.deleteArticle", pd);
+        dao.delete("ArticleMapper.deleteArticle", pd);
 	}
 
     /**
@@ -79,7 +80,7 @@ public class ArticleService implements ArticleManager {
      */
 	@Override
 	public void deleteAllArticles(String[] ARTICLE_IDS) throws Exception {
-        dao.findForObject("ArticleMapper.deleteAllArticles", ARTICLE_IDS);
+        dao.delete("ArticleMapper.deleteAllArticles", ARTICLE_IDS);
 	}
 
     /**
@@ -90,7 +91,7 @@ public class ArticleService implements ArticleManager {
      */
 	@Override
 	public List<PageData> listAllArticles(PageData pd) throws Exception {
-		return  (List<PageData>) dao.findForObject("ArticleMapper.listAllArticles", pd);
+		return  (List<PageData>) dao.findForList("ArticleMapper.listAllArticles", pd);
 	}
 
     /**

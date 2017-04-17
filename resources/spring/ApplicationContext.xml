@@ -127,6 +127,7 @@
 			/app**/** 					= anon
 			/weixin/** 					= anon
 			/login.jsp					= anon
+            /plugins/ueditor/**		    = anon
 			/**							= authc
 			</value>
 		</property>
