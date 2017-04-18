@@ -62,7 +62,6 @@
 									<th class="center" style="width:50px;">序号</th>
 									<th class="center">标题</th>
 									<th class="center">作者</th>
-									<th class="center">内容</th>
 									<th class="center">发布状态</th>
 									<th class="center"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>最后修改时间</th>
 									<th class="center">操作</th>
@@ -84,7 +83,6 @@
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<td class="center">${article.TITLE }</td>
 											<td class="center">${article.AUTHOR }</td>
-											<td class="center">${article.CONTENT }</td>
 											<td class="center">${article.STATUS }</td>
 											<td class="center">${article.LAST_EDIT}</td>
 											<td class="center">

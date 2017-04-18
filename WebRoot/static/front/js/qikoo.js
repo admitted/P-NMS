@@ -57,7 +57,7 @@ qikoo.dialog = function() {
         window.location.reload()
     };
     var r = qikoo.dialog.show({
-        html: ['<div class="dialog-content" style="padding: 0 60px 0 80px; text-align:left">', '<div class="content-title" style=""><img src="res/images/wbwx.jpg" width="282" height="283" border="0" /></div>',
+        html: ['<div class="dialog-content" style="padding: 0 60px 0 80px; text-align:left">', '<div class="content-title" style=""><img src="static/front/images/wbwx.jpg" width="282" height="283" border="0" /></div>',
 			"</div>"].join(""),
         width: 530,
         closeFn: n

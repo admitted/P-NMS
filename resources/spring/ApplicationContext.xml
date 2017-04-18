@@ -125,6 +125,7 @@
 				/uploadFiles/uploadImgs/** 		= anon
 				/code.do 						= anon
 				/front_index 					= anon
+				/front/**						= anon
 				/login_toLogin 					= anon
 				/login_login 					= anon
 				/app**/** 						= anon

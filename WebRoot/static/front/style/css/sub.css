@@ -9,10 +9,7 @@
 .listCon td a{color:#5a5a5a;}
 .listCon td a:hover{ color:#ae1e24}
 
-.page{text-align:center; padding:24px 0}
-.page,.page a{ font-size:14px; color:#5a5a5a;  margin:0 5px;}
-.page a{ padding:3px 8px;border:1px solid #dcdcdc;}
-.page a.on{ background:#ae1e24; font-weight:900; color:#fff; border:1px solid #ae1e24}
+
 
 /**/
 .hdjlsub{width:283px;}

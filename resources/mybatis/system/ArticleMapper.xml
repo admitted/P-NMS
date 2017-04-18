@@ -62,8 +62,6 @@
 					TITLE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 				or
 					AUTHOR LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
-				or
-					CONTENT LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
 				)
 			</if>
 			<if test="pd.lastEditStart!=null and pd.lastEditStart!=''">	<!-- 最后编辑时间检索 -->

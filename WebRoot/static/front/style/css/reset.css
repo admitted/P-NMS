@@ -87,7 +87,7 @@ body {
 
 /*header*/
 .header {
-    background: url("../../images/headerBg.png" /*tpa=http://hf.ahga.gov.cn/res/images/headerBg.png*/) repeat-x;
+    background: url("../../images/headerBg.png") repeat-x;
     height: 200px;
 }
 
@@ -146,13 +146,13 @@ body {
 }
 
 .menu .on a, .menu li a:hover {
-    background: url("../../images/menuOn.jpg" /*tpa=http://hf.ahga.gov.cn/res/images/menuOn.jpg*/) center bottom no-repeat;
+    background: url("../../images/menuOn.jpg" ) center bottom no-repeat;
     color: #fff
 }
 
 /*mainbody*/
 .mainbody {
-    background: url("../../images/mainbodyBg.jpg" /*tpa=http://hf.ahga.gov.cn/res/images/mainbodyBg.jpg*/) repeat-x
+    background: url("../../images/mainbodyBg.jpg" ) repeat-x
 }
 
 /*footer*/

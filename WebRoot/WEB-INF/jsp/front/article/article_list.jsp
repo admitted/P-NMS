@@ -10,11 +10,9 @@
             + path + "/";
 %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <script id="allmobilize" charset="utf-8"
-            src="../a.yunshipei.com/9076761ef8310d0cfa5aa3a85711410e/allmobilize.min.js"></script>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <link rel="alternate" media="handheld" href="#"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -27,10 +25,8 @@
     <link rel="stylesheet" type="text/css" href="../static/front/style/css/sub.css"/>
 
     <script type="text/javascript" src="../static/front/js/constant.js"></script>
-    <script type="text/javascript" src="../static/front/js/lwuserLogin.js"></script>
     <script type="text/javascript" src="../static/front/js/interview_common.js"></script>
     <script type="text/javascript" src="../static/front/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="../Scripts/swfobject_modified.js"></script>
 
 </head>
 
@@ -73,13 +69,6 @@
     </ul>
 </div>
 
-<script type="text/javascript" src="../static/front/js/fudong.js"></script>
-<script type="text/javascript">
-    window.onscroll = function () {
-        scrollTip();
-    };
-</script>
-
 <div class="mainbody">
     <div class="w1002">
         <div class="menubar">
@@ -115,7 +104,7 @@
                     <c:forEach items="${articleList}" var="article">
                         <tr>
                             <td width="5%" style="background:url(../static/front/images/liIcon.jpg) no-repeat center center;"></td>
-                            <td width="85%">
+                            <td width="84%">
                                 <a href="../front/view.do?ARTICLE_ID=${article.ARTICLE_ID }"  title="${article.TITLE }" target=_blank">
                                     ${article.TITLE }
                                 </a>
@@ -126,21 +115,11 @@
                         </tr>
                     </c:forEach>
                 </table>
-                <!--page start-->
+                <!--page start
                 <div class="page">
-                    <span>当前第1 / 28页</span>
-                    <a href="ggyw/index.html">首页</a>
-                    <a class="on" href="javascript:void(0);">1</a>
-                    <a href="ggyw/index_1.html">2</a>
-                    <a href="ggyw/index_2.html">3</a>
-                    <a href="ggyw/index_3.html">4</a>
-                    <a href="ggyw/index_4.html">5</a>
-                    ...
-                    <a onclick="window.location.href='../ggyw/index_27.html';" style="cursor: pointer;">28</a>
-                    <a onclick="window.location.href='../ggyw/index_1.html';" style="cursor: pointer;">下一页</a>
-                    <a href="ggyw/index_27.html">尾页</a>
+                    ${page.pageStr }
                 </div>
-                <!--page end-->
+                <page end-->
             </div>
         </div>
 
@@ -188,14 +167,6 @@
         </font>
     </p>
 </div>
-<script type="text/javascript">
-    swfobject.registerObject("FlashID3");
-</script>
-</body>
-</html>
-<script type="text/javascript">
-    swfobject.registerObject("FlashID3");
-</script>
 </body>
 </html>
 

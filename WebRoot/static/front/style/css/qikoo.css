@@ -57,7 +57,7 @@
 	padding-left: 10px;
 }
 .mod-dialog .dialog-close {
-	background: url("../../images/alertBtn.png"/*tpa=http://hf.ahga.gov.cn/res/images/alertBtn.png*/) no-repeat 0 0;
+	background: url("../../images/alertBtn.png") no-repeat 0 0;
 	height: 21px;
 	position: absolute;
 	right: 10px;
@@ -91,7 +91,7 @@
 	padding: 0 10px;
 }
 .mod-pop .pop-close {
-	background: url("../images/alertBtn.png"/*tpa=http://hf.ahga.gov.cn/res/style/images/alertBtn.png*/) no-repeat -109px 0;
+	background: url("../images/alertBtn.png") no-repeat -109px 0;
 	height: 22px;
 	position: absolute;
 	right: 6px;
@@ -110,7 +110,7 @@
 	text-align: center;
 }
 .mod-pop .pop-btn-green {
-	background: url("../images/alertBtn.png"/*tpa=http://hf.ahga.gov.cn/res/style/images/alertBtn.png*/) no-repeat 0 -24px;
+	background: url("../images/alertBtn.png") no-repeat 0 -24px;
 	color: #fff;
 	display: block;
 	float: left;
@@ -119,7 +119,7 @@
 	width: 120px;
 }
 .mod-pop .pop-btn-gray {
-	background: url("../images/alertBtn.png"/*tpa=http://hf.ahga.gov.cn/res/style/images/alertBtn.png*/) no-repeat 0 -62px;
+	background: url("../images/alertBtn.png") no-repeat 0 -62px;
 	color: #999;
 	display: block;
 	float: left;
@@ -147,7 +147,7 @@
 	width: 210px;
 }
 .mod-dialog .dialog-console a {
-	background: url("../images/alertBtn.png"/*tpa=http://hf.ahga.gov.cn/res/style/images/alertBtn.png*/) no-repeat 0 -22px;
+	background: url("../images/alertBtn.png") no-repeat 0 -22px;
 	display: inline-block;
 	font-size: 16px;
 	height: 36px;

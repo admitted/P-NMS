@@ -22,9 +22,19 @@
 
     <link rel="stylesheet" type="text/css" href="static/front/style/css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="static/front/style/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="static/front/style/css/qikoo.css"/>
     <script type="text/javascript" src="static/front/js/constant.js"></script>
     <script type="text/javascript" src="static/front/js/interview_common.js"></script>
     <script type="text/javascript" src="static/front/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="static/front/js/qikoo.js"></script>
+    <script type="text/javascript">
+        function payment(){
+            qikoo.dialog.payNotice(function(){
+
+            });
+        }
+    </script>
+
 
 </head>
 
@@ -33,24 +43,20 @@
     <div class="w1002">
         <div class="fl logo">
             <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="480" height="110">
-                <param name="movie" value="static/front/images/logo.swf"
-                       tppabs="http://hf.ahga.gov.cn/res/images/logo.swf"/>
+                <param name="movie" value="static/front/images/logo.swf"/>
                 <param name="quality" value="high"/>
                 <param name="wmode" value="transparent"/>
                 <param name="swfversion" value="15.0.0.0"/>
                 <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
-                <param name="expressinstall" value="Scripts/expressInstall.swf"
-                       tppabs="http://hf.ahga.gov.cn/Scripts/expressInstall.swf"/>
+                <param name="expressinstall" value="Scripts/expressInstall.swf"/>
                 <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
                 <!--[if !IE]>-->
-                <object type="application/x-shockwave-flash" data="static/front/images/logo.swf"
-                        tppabs="http://hf.ahga.gov.cn/res/images/logo.swf" width="480" height="110">
+                <object type="application/x-shockwave-flash" data="static/front/images/logo.swf" width="480" height="110">
                     <!--<![endif]-->
                     <param name="quality" value="high"/>
                     <param name="wmode" value="transparent"/>
                     <param name="swfversion" value="15.0.0.0"/>
-                    <param name="expressinstall" value="Scripts/expressInstall.swf"
-                           tppabs="http://hf.ahga.gov.cn/Scripts/expressInstall.swf"/>
+                    <param name="expressinstall" value="Scripts/expressInstall.swf"/>
                     <!--[if !IE]>-->
                 </object>
                 <!--<![endif]-->
@@ -60,13 +66,13 @@
 </div>
 <div class="menu">
     <ul class="w1002">
-        <li class="on"><a href="<%=basePath%>index" >首页</a></li>
-        <li><a href="<%=basePath%>front/listArticles.do?CATEGORY=1" >机构概况</a></li>
-        <li><a href="<%=basePath%>front/listArticles.do?CATEGORY=2" >公安要闻</a></li>
-        <li><a href="<%=basePath%>front/listArticles.do?CATEGORY=3" >新闻发布</a></li>
-        <li><a href="<%=basePath%>front/listArticles.do?CATEGORY=4" >警务动态</a></li>
-        <li><a href="<%=basePath%>front/listArticles.do?CATEGORY=5" >警界博览</a></li>
-        <li><a href="<%=basePath%>front/listArticles.do?CATEGORY=6" >防范常识</a></li>
+        <li class="on"><a href="index" >首页</a></li>
+        <li><a href="front/listArticles.do?CATEGORY=1" >机构概况</a></li>
+        <li><a href="front/listArticles.do?CATEGORY=2" >公安要闻</a></li>
+        <li><a href="front/listArticles.do?CATEGORY=3" >新闻发布</a></li>
+        <li><a href="front/listArticles.do?CATEGORY=4" >警务动态</a></li>
+        <li><a href="front/listArticles.do?CATEGORY=5" >警界博览</a></li>
+        <li><a href="front/listArticles.do?CATEGORY=6" >防范常识</a></li>
     </ul>
 </div>
 
@@ -157,8 +163,11 @@
                 <ul class="winB">
                     <c:forEach items="${article2List}" var="article2">
                         <li><a href="front/view.do?ARTICLE_ID=${article2.ARTICLE_ID }" title="${article2.TITLE }" target="_blank">
-                                ${article2.TITLE }
-                        </a><span class="date">${fn:substring(article2.LAST_EDIT, 5, 10)}</span>
+                                ${fn:substring(article2.TITLE,0,18) }...
+                            </a>
+                            <span class="date">
+                                ${fn:substring(article2.LAST_EDIT, 5, 10)}
+                            </span>
                         </li>
                     </c:forEach>
                 </ul>
@@ -169,45 +178,15 @@
         <div class="win2 fl">
             <div class="winT2">
                 <h2>新闻发布</h2>
-                <a href="front/listArticles.do?CATEGORY=3" tppabs="http://hf.ahga.gov.cn/xwfb/index.html" class="more">更多</a>
+                <a href="front/listArticles.do?CATEGORY=3"  class="more">更多</a>
             </div>
             <ul class="winB">
-                <li><a href="xwfb/201703/2315443026sg.html"
-                       title="合肥警方侦破50亿元特大虚开增值税专用发票案" target="_blank">
-                    合肥警方侦破50亿元特大虚...
-                </a><span class="date">
-						03-22
-				</span></li>
-                <li><a href="xwfb/201703/20162719rkdf.html"
-                       title="合肥多车被烧案破  男子疑因下棋被辱骂报复" target="_blank">
-                    合肥多车被烧案破 男子疑...
-                </a><span class="date">
-						03-13
-				</span></li>
-                <li><a href="xwfb/201703/061631369sib.html"
-                       title="拉杆箱藏女尸  合肥警方快速侦破抢劫杀人案件" target="_blank">
-                    拉杆箱藏女尸 合肥警方快...
-                </a><span class="date">
-						03-06
-				</span></li>
-                <li><a href="xwfb/201703/06162813noau.html"
-                       title="合肥警方侦破首例非法控制计算机信息系统挂“黑链”案" target="_blank">
-                    合肥警方侦破首例非法控制计...
-                </a><span class="date">
-						03-02
-				</span></li>
-                <li><a href="xwfb/201701/25111851b8dj.html"
-                       title="合肥警方快速侦破安徽省首例“假罚单”案" target="_blank">
-                    合肥警方快速侦破安徽省首例...
-                </a><span class="date">
-						01-24
-				</span></li>
-                <li><a href="xwfb/201702/07112805sxqu.html"
-                       title="合肥警方端掉一碰瓷团伙  5名嫌疑人全部落网" target="_blank">
-                    合肥警方端掉一碰瓷团伙 ...
-                </a><span class="date">
-						01-23
-				</span></li>
+                <c:forEach items="${article3List}" var="article3">
+                    <li><a href="front/view.do?ARTICLE_ID=${article3.ARTICLE_ID }" title="${article3.TITLE }" target="_blank">
+                            ${fn:substring(article3.TITLE,0,13) }...
+                    </a><span class="date">${fn:substring(article3.LAST_EDIT, 5, 10)}</span>
+                    </li>
+                </c:forEach>
             </ul>
         </div>
         <div class="win2 fl">
@@ -216,42 +195,12 @@
                 <a href="front/listArticles.do?CATEGORY=4"  class="more">更多</a>
             </div>
             <ul class="winB">
-                <li><a href="jwdt/201704/05113844dzjv.html"
-                       title="男子楼顶割腕欲跳楼  肥西民警“攀岩”一把救下" target="_blank">
-                    男子楼顶割腕欲跳楼 肥西...
-                </a><span class="date">
-						04-05
-				</span></li>
-                <li><a href="jwdt/201704/05113810o1ev.html"
-                       title="男子网购个人信息被刑拘  新站分局破获非法获取公民信息案" target="_blank">
-                    男子网购个人信息被刑拘 ...
-                </a><span class="date">
-						04-05
-				</span></li>
-                <li><a href="jwdt/201704/05113441l1uz.html"
-                       title="跨区用警重拳出击 合肥交警集中整治“三大车”交通违法" target="_blank">
-                    跨区用警重拳出击 合肥交警...
-                </a><span class="date">
-						04-01
-				</span></li>
-                <li><a href="jwdt/201704/051132512ith.html"
-                       title="25辆车连遭“黑手” 包河公安分局破获系列砸车窗盗窃案" target="_blank">
-                    25辆车连遭“黑手” 包河...
-                </a><span class="date">
-						04-01
-				</span></li>
-                <li><a href="jwdt/201703/31155257j98o.html"
-                       title="男子见车拉门盗窃财物　已被合肥高新区公安抓获" target="_blank">
-                    男子见车拉门盗窃财物　已被...
-                </a><span class="date">
-						03-31
-				</span></li>
-                <li><a href="jwdt/201703/31155221chhc.html"
-                       title="合肥新驾考中心4月1日正式启用" target="_blank">
-                    合肥新驾考中心4月1日正式...
-                </a><span class="date">
-						03-31
-				</span></li>
+                <c:forEach items="${article4List}" var="article4">
+                    <li><a href="front/view.do?ARTICLE_ID=${article4.ARTICLE_ID }" title="${article4.TITLE }" target="_blank">
+                            ${fn:substring(article4.TITLE,0,13) }...
+                    </a><span class="date">${fn:substring(article4.LAST_EDIT, 5, 10)}</span>
+                    </li>
+                </c:forEach>
             </ul>
         </div>
         <div class="fr box2C30">
@@ -262,22 +211,20 @@
                 <div class="winB">
                     <ul>
                         <li>
-                            <a href="javascript:if(confirm('http://zwgk.hefei.gov.cn/zwgk/public/spage.xp?doAction=sindex&unitid=0004000100010006'))window.location='http://zwgk.hefei.gov.cn/zwgk/public/spage.xp?doAction=sindex&unitid=0004000100010006'"
-                               target="_blank">政府信息公开指南</a></li>
-                        <li>
-                            <a href="javascript:if(confirm('http://zwgk.hefei.gov.cn/zwgk/public/index.xp?doAction=sframe'))window.location='http://zwgk.hefei.gov.cn/zwgk/public/index.xp?doAction=sframe'"
-                               target="_blank">政府信息公开目录</a>
+                            <a target="_blank" href="http://zwgk.hefei.gov.cn/zwgk/public/spage.xp?doAction=sindex&unitid=0004000100010006">政府信息公开指南</a>
                         </li>
                         <li>
-                            <a href="javascript:if(confirm('http://zwgk.hefei.gov.cn/zwgk/public/spage.xp?doAction=sindex&unitid=0004000100010006&frame=nb'))window.location='http://zwgk.hefei.gov.cn/zwgk/public/spage.xp?doAction=sindex&unitid=0004000100010006&frame=nb'"
-                               target="_blank">政府信息公开年报</a></li>
-                        <li>
-                            <a href="javascript:if(confirm('http://zwgk.hefei.gov.cn/zwgk/public/index.xp?doAction=xxgkgd'))window.location='http://zwgk.hefei.gov.cn/zwgk/public/index.xp?doAction=xxgkgd'"
-                               target="_blank">政府信息公开制度</a>
+                            <a target="_blank" href="http://zwgk.hefei.gov.cn/zwgk/public/index.xp?doAction=sframe">政府信息公开目录</a>
                         </li>
                         <li>
-                            <a href="javascript:if(confirm('http://zwgk.hefei.gov.cn/zwgk/public/ysqgk.xp'))window.location='http://zwgk.hefei.gov.cn/zwgk/public/ysqgk.xp'"
-                               target="_blank">政府信息依申请公开</a></li>
+                            <a target="_blank" href="http://zwgk.hefei.gov.cn/zwgk/public/spage.xp?doAction=sindex&unitid=0004000100010006&frame=nb">政府信息公开年报</a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="http://zwgk.hefei.gov.cn/zwgk/public/index.xp?doAction=xxgkgd">政府信息公开制度</a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="http://zwgk.hefei.gov.cn/zwgk/public/ysqgk.xp">政府信息依申请公开</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -311,24 +258,23 @@
             <div class="wsfw fr">
                 <div class="rdad fl">
                     <a href="rddbyablhf/index.html" >
-                        <img src="static/front/images/rdad.jpg"
-                             width="240" height="50"/>
+                        <img src="static/front/images/rdad.jpg" width="240" height="50"/>
                     </a>
                 </div>
                 <div class="jzxx">
                     <dl>
-                        <dd><a href="jzxxlb/index.html" >局长信箱</a></dd>
-                        <dd class="fr"><a href="tzgg/index.html" >通知公告</a>
-                        </dd>
-                        <dd><a href="wjdc/index.html" >调查征集</a></dd>
-                        <dd class="fr"><a href="zxdh/index.html" >咨询电话</a>
-                        </dd>
+                        <dd><a href="#" >局长信箱</a></dd>
+                        <dd class="fr"><a href="#" >通知公告</a></dd>
+                        <dd><a href="#" >调查征集</a></dd>
+                        <dd class="fr"><a href="#" >咨询电话</a></dd>
                     </dl>
 
                 </div>
-                <div class="spad fl"><a href="spxw/index.html" ><img
-                        src="static/front/images/sp.jpg"  width="240"
-                        height="76"/></a></div>
+                <div class="spad fl">
+                    <a href="spxw/index.html" >
+                        <img src="static/front/images/sp.jpg"  width="240" height="76"/>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -339,42 +285,12 @@
                 <a href="front/listArticles.do?CATEGORY=6"  class="more">更多</a>
             </div>
             <ul class="winB">
-                <li><a href="ffcs/201703/31162128ndid.html"
-                       title="警方提醒：免费WIFI可能在干四件坏事" target="_blank">
-                    警方提醒：免费WIFI可能...
-                </a><span class="date">
-						03-20
-				</span></li>
-                <li><a href="ffcs/201703/31161147az3x.html"
-                       title="交警支招：“荷式开门法”值得借鉴" target="_blank">
-                    交警支招：“荷式开门法”值...
-                </a><span class="date">
-						03-14
-				</span></li>
-                <li><a href="ffcs/201703/15162346uetn.html"
-                       title="民警支招：“猜猜我是谁”骗局又升级  报个假名试试即知" target="_blank">
-                    民警支招：“猜猜我是谁”骗...
-                </a><span class="date">
-						03-10
-				</span></li>
-                <li><a href="ffcs/201703/09162629b9yr.html"
-                       title="民警提醒：用过的火车票千万别乱丢！" target="_blank">
-                    民警提醒：用过的火车票千万...
-                </a><span class="date">
-						03-08
-				</span></li>
-                <li><a href="ffcs/201703/0711382845qg.html"
-                       title="警方提醒：谨防利用网银授权支付诈骗" target="_blank">
-                    警方提醒：谨防利用网银授权...
-                </a><span class="date">
-						03-03
-				</span></li>
-                <li><a href="ffcs/201702/28155319zrea.html"
-                       title="警方提醒：找兼职须谨慎  网上刷单是骗局  " target="_blank">
-                    警方提醒：找兼职须谨慎 ...
-                </a><span class="date">
-						02-22
-				</span></li>
+                <c:forEach items="${article6List}" var="article6">
+                    <li><a href="front/view.do?ARTICLE_ID=${article6.ARTICLE_ID }" title="${article6.TITLE }" target="_blank">
+                            ${fn:substring(article6.TITLE,0,13) }...
+                    </a><span class="date">${fn:substring(article6.LAST_EDIT, 5, 10)}</span>
+                    </li>
+                </c:forEach>
             </ul>
         </div>
         <div class="win2 fl">
@@ -383,42 +299,12 @@
                 <a href="front/listArticles.do?CATEGORY=5" class="more">更多</a>
             </div>
             <ul class="winB">
-                <li><a href="jjbl/201606/16150425if2f.html"
-                       title="中国古代争议调处机制" target="_blank">
-                    中国古代争议调处机制
-                </a><span class="date">
-						06-16
-				</span></li>
-                <li><a href="jjbl/201606/16150600x1ps.html"
-                       title="美国警察心理咨询的发展" target="_blank">
-                    美国警察心理咨询的发展
-                </a><span class="date">
-						06-14
-				</span></li>
-                <li><a href="jjbl/201606/16153531v632.html"
-                       title="世界上第一支消防队诞生在中国" target="_blank">
-                    世界上第一支消防队诞生在中...
-                </a><span class="date">
-						05-23
-				</span></li>
-                <li><a href="jjbl/201606/16153652di3w.html"
-                       title="国外抓捕嫌犯的奇特手段" target="_blank">
-                    国外抓捕嫌犯的奇特手段
-                </a><span class="date">
-						05-06
-				</span></li>
-                <li><a href="jjbl/201604/20154007vgb7.html"
-                       title="德国警察的“110”" target="_blank">
-                    德国警察的“110”
-                </a><span class="date">
-						04-20
-				</span></li>
-                <li><a href="jjbl/201604/20152858exad.html"
-                       title="美国：“信用卡”犯罪打击策略" target="_blank">
-                    美国：“信用卡”犯罪打击策...
-                </a><span class="date">
-						03-10
-				</span></li>
+                <c:forEach items="${article5List}" var="article5">
+                    <li><a href="front/view.do?ARTICLE_ID=${article5.ARTICLE_ID }" title="${article5.TITLE }" target="_blank">
+                            ${fn:substring(article5.TITLE,0,13) }...
+                    </a><span class="date">${fn:substring(article5.LAST_EDIT, 5, 10)}</span>
+                    </li>
+                </c:forEach>
             </ul>
         </div>
         <div class="fr box2C3 ztzl">
@@ -426,19 +312,24 @@
                 <h2>专题专栏</h2>
             </div>
             <ul class="zlB">
-                <li><a href="gawh/index.html" ><img
-                        src="static/front/images/zlImg02.jpg"
-                        alt="警营文化"/></a></li>
-                <li><a href="mtkga/index.html" ><img
-                        src="static/front/images/zlImg03.jpg"
-                        alt="媒体看公安"/></a></li>
-                <li><a href="zfhfpy/index.html" ><img
-                        src="static/front/images/zlImg04.jpg"
-                        alt="政风行风评议"/></a></li>
                 <li>
-                    <a href="javascript:if(confirm('http://www.mps.gov.cn/n16/n983040/n4017840/n4611416/index.html'))window.location='http://www.mps.gov.cn/n16/n983040/n4017840/n4611416/index.html'"
-                        target="_blank"><img
-                            src="static/front/images/qmshga.jpg" /></a>
+                    <a href="#" >
+                    <img src="static/front/images/zlImg02.jpg" alt="警营文化"/></a>
+                </li>
+                <li>
+                    <a href="#" >
+                        <img src="static/front/images/zlImg03.jpg" alt="媒体看公安"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" >
+                        <img src="static/front/images/zlImg04.jpg" alt="政风行风评议"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <img src="static/front/images/qmshga.jpg" />
+                    </a>
                 </li>
             </ul>
         </div>
@@ -447,23 +338,20 @@
 
         <div class="linkImg">
             <a class="fl" target="_blank" style="cursor:pointer;" onclick="payment();">
-                <img src="static/front/images/linkImg01.jpg"
-                     alt="合肥警方微信平台"/></a>
-            <a href="javascript:if(confirm('http://weibo.com/hefeiga?zw=news&sudaref=www.hfga.gov.cn'))window.location='http://weibo.com/hefeiga?zw=news&sudaref=www.hfga.gov.cn'"
-               class="fl" target="_blank">
-                <img src="static/front/images/linkImg02.jpg"
-                     alt="中华人民共和国公安部"/></a>
-            <a class="fl" target="_blank"
-               href="javascript:if(confirm('http://hf.ahga.gov.cn/wzqlj/'))window.location='http://hf.ahga.gov.cn/wzqlj/'">
-                <img src="static/front/images/linkImg03.jpg"
-                     alt="公安网站大联盟"/></a>
-            <a href="hfgawjz/index.html" tppabs="http://hf.ahga.gov.cn/hfgawjz/index.html" class="fl" target="_blank">
-                <img src="static/front/images/linkImg04.jpg"
-                     alt="中华人民共和国公安部"/></a>
-            <a href="javascript:if(confirm('http://www.hefei.gov.cn/'))window.location='http://www.hefei.gov.cn/'"
-               class="fr" target="_blank">
-                <img src="static/front/images/linkImg05.jpg"
-                     alt="合肥市政府"/></a>
+                <img src="static/front/images/linkImg01.jpg" alt="合肥警方微信平台"/>
+            </a>
+            <a class="fl" target="_blank" href="http://weibo.com/hefeiga?zw=news&sudaref=www.hfga.gov.cn" >
+                <img src="static/front/images/linkImg02.jpg" alt="合肥警方微博平台"/>
+            </a>
+            <a class="fl" target="_blank" href="http://hf.ahga.gov.cn/wzqlj/">
+                <img src="static/front/images/linkImg03.jpg" alt="公安网站大联盟"/>
+            </a>
+            <a class="fl" href="http://hf.ahga.gov.cn/hfgawjz/index.html"   >
+                <img src="static/front/images/linkImg04.jpg" alt="中华人民共和国公安部"/>
+            </a>
+            <a class="fr" href="http://www.hefei.gov.cn/"  target="_blank">
+                <img src="static/front/images/linkImg05.jpg" alt="合肥市政府"/>
+            </a>
         </div>
         <div class="clearfix"></div>
 
@@ -473,15 +361,11 @@
     <p>Copyright © HeFei Public Security Bureau. 2009 All Right Reserved.</p>
     <p>版权所有：合肥市公安局 皖ICP备：05015515号-1 地址：安徽省合肥市寿春路290号 <a href="login_toLogin">后台系统登录</a> </p>
     <p></p>
-    <a target="_blank" href="javascript:if(confirm('http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34010002000016'))window.location='http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34010002000016'"
-       style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img
-            src="static/front/images/jbtb.png"  style="float:left;"/>
-        <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">皖公网安备
-            34010002000016号</p></a>
-    <p><font class="link_13">
-        <span id="visitSiteNum"></span>
-    </font>
-    </p>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34010002000016"
+       style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+        <img src="static/front/images/jbtb.png"  style="float:left;"/>
+        <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">皖公网安备34010002000016号</p>
+    </a>
 </div>
 
 </body>
