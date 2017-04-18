@@ -1,10 +1,12 @@
 package com.fh.controller.system.login;
 
 import com.fh.controller.base.BaseController;
+import com.fh.entity.Page;
 import com.fh.entity.system.Menu;
 import com.fh.entity.system.Role;
 import com.fh.entity.system.User;
 import com.fh.service.system.appuser.AppuserManager;
+import com.fh.service.system.article.ArticleManager;
 import com.fh.service.system.buttonrights.ButtonrightsManager;
 import com.fh.service.system.fhbutton.FhbuttonManager;
 import com.fh.service.system.menu.MenuManager;
@@ -31,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 总入口
+ * 后台总入口
  * @author: cui
  * @date： 2017/3/19
  */
@@ -55,7 +57,34 @@ public class LoginController extends BaseController {
 
 	@Resource(name="appuserService")
 	private AppuserManager appuserService;
-	
+
+	@Resource(name="articleService")
+	private ArticleManager articleService;
+
+	/**
+	 * 前台首页展示所有文章
+	 * @param page
+	 * @return
+	 * @throption
+	 */
+	@RequestMapping(value="/index")
+	public ModelAndView listAllArticles(Page page)throws Exception{
+		logBefore(logger, "前台首页显示各分类文章");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		pd.put("limit",7);               		// 设置取每个 category 时间最近的 7条文章
+		for(int i = 1;i<= 6;i++){
+			pd.put("CATEGORY",i+"");
+			page.setPd(pd);
+			List<PageData> articleList = articleService.articlelistByLimit(page);	 //文章最近 7 条数据列表
+			mv.addObject("article"+i+"List", articleList);
+		}
+		mv.setViewName("front/front_index");
+		mv.addObject("pd", pd);
+		return mv;
+	}
+
 	/**
 	 * 访问登录页 (web.xml 因没有配置welcome页面 Tomcat默认找到根目录下的index.jsp)
 	 * @return
@@ -71,7 +100,7 @@ public class LoginController extends BaseController {
 		mv.addObject("pd",pd);
 		return mv;
 	}
-	
+
 	/**
 	 * 请求登录，验证用户
 	 * 将用户有用信息放入 session 中 (ID,NAME,PASSWORD,RIGHTS,ROLE_ID等9个)

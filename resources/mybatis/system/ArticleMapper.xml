@@ -75,6 +75,17 @@
 		order by LAST_EDIT desc
 	</select>
 
+	<!-- 列出某分类下的最近时间的 n 篇文章 -->
+	<select id="articlelistByLimit"  parameterType="page" resultType="pd" >
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include>
+		where
+			CATEGORY = #{pd.CATEGORY}
+		order by LAST_EDIT desc LIMIT #{pd.limit}
+	</select>
+
 	<!-- 新增文章 -->
 	<insert id="saveArticle" parameterType="pd" >
 		insert into <include refid="tableName"></include> (

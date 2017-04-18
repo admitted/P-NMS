@@ -1,0 +1,117 @@
+@charset "utf-8";
+/* CSS Document */
+/*listBox*/
+.heightAuto{ height:auto}
+.listBox{ padding:21px 30px;height: auto;}
+.listCon{ padding-top:10px;}
+.listCon table{margin:0 auto}
+.listCon td{ height:36px; line-height:36px; color:#5a5a5a; font-size:16px}
+.listCon td a{color:#5a5a5a;}
+.listCon td a:hover{ color:#ae1e24}
+
+.page{text-align:center; padding:24px 0}
+.page,.page a{ font-size:14px; color:#5a5a5a;  margin:0 5px;}
+.page a{ padding:3px 8px;border:1px solid #dcdcdc;}
+.page a.on{ background:#ae1e24; font-weight:900; color:#fff; border:1px solid #ae1e24}
+
+/**/
+.hdjlsub{width:283px;}
+.hdjlTit{width:222px; margin:0 auto; padding-top:20px;}
+.hdjlTit a{ display:block; width:132px; height:60px; background:url(../../images/subbg.jpg) no-repeat; padding-left:90px;line-height:60px; font-size:18px; color:#333333;}
+.hdjlTit a.on{ color:#ae1e24;}
+.hdjlCon{width:672px; font-size:16px; color:#333333; line-height:36px; padding:20px;}
+.hdjltu{ width:328px; height:50px; margin:20px auto;}
+
+.jggkTit{padding-right:20px}
+.jggkTit a{ display:block; width:198px; height:38px; border:1px solid #dedede; text-align:center; line-height:38px; font-size:18px; color:#5a5a5a; margin-bottom:12px;}
+.jggkTit a.on{background:#ae1e24; border:1px solid #ae1e24;  color:#fff}
+.jggkCon{ border-left:1px solid #e6e6e6; padding-left:20px; width:713px; font-size:16px; color:#5a5a5a; line-height:36px;}
+.gkCont p{ text-indent:2em}
+
+
+.contBox{ padding:24px 46px;}
+.contTit{ text-align: center; font-size:20px; color:#5a5a5a; padding-bottom:24px;}
+.contInfo{ height:32px; line-height:32px; background:#f0f0f0; text-align:center }
+.contInfo span{padding: 0 40px; color:#666}
+.contImg{ padding:30px 0; text-align: center}
+
+
+/*
+    以下感觉用不到，注释掉 2017/4/17
+*/
+
+/*.contImg img{ width:498px; height:313px;}*/
+.contArticle{ text-indent:2em; line-height:30px; font-size:16px; color:#666}
+#contMain div{text-indent:2em; line-height:30px; font-size:16px; color:#666}
+.artiXx{ color:#666; padding:46px 0}
+.artiXx a{ color:#666}
+.artiXx a img{vertical-align:middle; margin:0 6px;}
+
+.zxdhBox{ width:709px; margin:0 auto}
+.zxdhCont{ border-left:1px solid #e6e6e6;border-top:1px solid #e6e6e6}
+.zxdhCont td,.zxdhCont th{border-right:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6; font-size:16px; color:#5a5a5a; font-weight:400; height:40px; line-height:40px;}
+.zxdhCont td{padding-left:10px;}
+
+
+/*mainBot
+.mainBot{ padding-top:7px;}
+.xjTable th{ background:url(../../images/hdTh.jpg) repeat-x; height:38px; line-height:38px; font-weight:400;font-family:"\5FAE\8F6F\96C5\9ED1"; font-size:14px;}
+.xjTable td{ height:36px; line-height:36px; border-bottom:1px dashed #e5e5e5; text-align:center}
+.xjTable .alLeft{ text-align:left;padding-left:8px;}
+.borderR{border-right:1px solid #d7d7d7}
+
+.page{ text-align:center; padding-top:30px; padding-bottom:30px;}
+.page a{ display:inline-block; padding:6px 10px; border:1px solid #e2e2e2; margin:0 5px; }
+.page .on{ background:#4777ff; color:#fff; border:none}
+*/
+
+/*wyxx
+.wyxx p{ text-indent:2em; font-size:14px; line-height:36px;background:url(../../images/pBg.jpg) repeat; padding:0 29px;}
+.wyxx h3{ font-size:14px; height:36px;line-height:36px;}
+.wyxx p a{ font-weight:bold; color:#7cb11f}
+.xxBtn{ text-align:center; padding:40px 0 20px}
+.xxBtn a{ background:#88c222; padding:6px 20px; color:#fff; font-weight:bold;}
+*/
+
+/*xjCon
+.xjCon h3{background:url(../../images/hdTh.jpg) repeat-x; height:38px; line-height:38px; font-weight:900;font-family:"\5FAE\8F6F\96C5\9ED1"; font-size:14px; text-align:center}
+.xjInfo{ text-align:center;  border-bottom:1px solid #e5e5e5; height:31px; line-height:31px;}
+.xjInfo span{ padding:0 20px;}
+.xjCon p{ line-height:36px;background:url(../../images/pBg.jpg) repeat; text-indent:2em; padding:0 10px;}
+
+.hfCon{ padding-top:35px; padding-bottom:16px;}
+.hfCon h3{ background:#2ca1f1 url(../../images/arrowBw.jpg) no-repeat 82px center; height:36px; line-height:36px; font-size:14px; font-weight:900; color:#fff; padding-left:11px;}
+.hfCont{ background:#f9fbfc; border-bottom:2px solid #2ca1f1}
+.hfCont p{line-height:36px;background:url(../../images/pBg1.jpg) repeat; text-indent:2em; padding:0 28px; font-size:14px}
+.textRight{ text-align:right}
+
+.hdSear{ width:243px; height:40px; padding-top:20px; padding-left:30px;}
+.hdSear input{  float:left}
+.hdText{border:1px solid #88c222;width: 167px; padding-left:10px;height:38px; line-height:38px;}
+.hdSearBtn{background:url(../../images/hdSear.jpg) no-repeat; height:40px; width:40px; cursor:pointer}
+*/
+
+/*bdCon
+.bdCon h3{ font-weight:400}
+.bdCon h3 strong{ color:#1a77c1}
+.bdTable{ margin-top:20px; margin-bottom:20px;}
+.bdTable th{ font-size:14px; font-weight:900; color:#0c7cd4; text-align:right;padding-right:10px;}
+.bdTable td{ padding-top:5px;padding-bottom:5px; }
+.bdTextarea{ border:1px solid #c0d7f7; padding:0; margin:0; width:498px; height:148px;}
+.bdSelect{ border:1px solid #c0d7f7; width:130px; height:30px; line-height:30px;}
+.bdTableText{border:1px solid #c0d7f7; width:380px; height:30px; line-height:30px;}
+.bdTableText1{width:250px;}
+.bdTableText2{width:150px;}
+.yzm img{ vertical-align:middle; * vertical-align:!important;margin-left:10px}
+.bz{ padding-left:10px}
+.subBtn,.resetBtn{ float:left; width:85px; height:30px; cursor:pointer; margin-top:20px; margin-bottom:5px;}
+.subBtn{ background:url(../../images/submitBtn.jpg) no-repeat; margin-right:20px}
+.resetBtn{ background:url(../../images/resetBtn.jpg) no-repeat}
+*/
+
+/*2015-10-15
+.mList { padding-left:13px; padding-right:13px}
+.mList li{ height:36px; line-height:36px; border-bottom:1px dashed #e5e5e5;}
+.mList li a{ float:left;}
+.mList li .date{ float:right}
+*/

@@ -43,7 +43,18 @@ public class ArticleService implements ArticleManager {
 		return ( List <PageData>)dao.findForList("ArticleMapper.articlelistPageByCategory", page);
 	}
 
-    /**
+	/**
+	 * 首页获取分类 最近 n 条数据
+	 * @param page
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public List<PageData> articlelistByLimit(Page page) throws Exception {
+		return ( List <PageData>)dao.findForList("ArticleMapper.articlelistByLimit", page);
+	}
+
+	/**
      * 保存文章
      * @param pd
      * @throws Exception

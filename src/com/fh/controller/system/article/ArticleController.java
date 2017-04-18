@@ -35,6 +35,24 @@ public class ArticleController extends BaseController {
 	private ArticleManager articleService;
 
 	/**
+	 * 获取单篇文章详细信息
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/view")
+	public ModelAndView view() throws Exception{
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		pd = articleService.getArticleByID(pd);				//根据文章 ID读取
+		mv.setViewName("system/article/article_view");
+		mv.addObject("msg", "editArticle");
+		mv.addObject("pd", pd);
+		return mv;
+	}
+
+	/**
      * 显示分类文章列表
 	 * @param page
 	 * @return
@@ -123,24 +141,6 @@ public class ArticleController extends BaseController {
         mv.addObject("pd", pd);
         System.out.println("I'm here!");
         return mv;
-	}
-	
-	/**
-	 * 获取单篇文章详细信息
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(value="/view")
-	public ModelAndView view() throws Exception{
-		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限
-		ModelAndView mv = this.getModelAndView();
-		PageData pd = new PageData();
-		pd = this.getPageData();
-		pd = articleService.getArticleByID(pd);				//根据文章 ID读取
-		mv.setViewName("system/article/article_view");
-		mv.addObject("msg", "editArticle");
-		mv.addObject("pd", pd);
-		return mv;
 	}
 
 	/**

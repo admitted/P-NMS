@@ -27,7 +27,17 @@ public interface ArticleManager {
 	 * @throws Exception
 	 */
 	List<PageData> articlelistPageByCategory(Page page) throws Exception;
-	
+
+
+	/**
+	 * 列出某栏目下的所有文章
+	 * @param page
+	 * @return
+	 * @throws Exception
+	 */
+	List<PageData> articlelistByLimit(Page page) throws Exception;
+
+
 	/**
      * 保存文章
 	 * @param pd
