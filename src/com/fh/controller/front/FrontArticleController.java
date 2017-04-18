@@ -26,6 +26,31 @@ public class FrontArticleController  extends BaseController{
     private ArticleManager articleService;
 
     /**
+     * 前台首页展示所有文章
+     * @param page
+     * @return
+     * @throption
+     */
+    @RequestMapping(value="/index")
+    public ModelAndView listAllArticles(Page page)throws Exception{
+        logBefore(logger, "Front 前台首页显示各分类文章");
+        ModelAndView mv = this.getModelAndView();
+        PageData pd = new PageData();
+        pd = this.getPageData();
+        pd.put("STATUS",1);                     // 前台过滤 一定要 哦
+        pd.put("limit",7);               		// 设置取每个 category 时间最近的 7条文章
+        for(int i = 1;i<= 6;i++){
+            pd.put("CATEGORY",i+"");
+            page.setPd(pd);
+            List<PageData> articleList = articleService.articlelistByLimit(page);	 //文章最近 7 条数据列表
+            mv.addObject("article"+i+"List", articleList);
+        }
+        mv.setViewName("front/front_index");
+        mv.addObject("pd", pd);
+        return mv;
+    }
+
+    /**
      * 展示单篇文章信息
      * @return
      * @throws Exception
@@ -60,10 +85,12 @@ public class FrontArticleController  extends BaseController{
         String[] category = "QQCUI876198439,1-机构概况,2-公安要闻,3-新闻发布,4-警务动态,5-警界博览,6-防范常识".split(",");
         int cint = Integer.parseInt(pd.getString("CATEGORY"));
         pd.put("categoryName" , category[cint].substring(2));       // 将分类名传到前台
+
         String keywords = pd.getString("keywords");					// 关键词检索条件
         if(null != keywords && !"".equals(keywords)){
             pd.put("keywords", keywords.trim());
         }
+
         String lastEditStart = pd.getString("lastEditStart");		// 开始时间
         String lastEditEnd = pd.getString("lastEditEnd");			// 结束时间
         if(lastEditStart != null && !"".equals(lastEditStart)){ 	// 若不为空加入 pd
@@ -72,6 +99,8 @@ public class FrontArticleController  extends BaseController{
         if(lastEditEnd != null && !"".equals(lastEditEnd)){
             pd.put("lastEditEnd", lastEditEnd+" 00:00:00");
         }
+
+        pd.put("STATUS",1);                 // 前台过滤 一定要 哦
         page.setPd(pd);
         List<PageData> articleList = articleService.articlelistPageByCategory(page);	 //文章列表
         mv.setViewName("front/article/article_list");

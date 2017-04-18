@@ -118,6 +118,24 @@ public class ArticleController extends BaseController {
 		mv.addObject("pd", pd);
 		return mv;
 	}
+
+	/**
+	 * 图片轮番页面的 5 篇文章
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/slideArticle")
+	public ModelAndView slideArticle()throws Exception{
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		pd.put("ROLE_ID", "1");
+		mv.setViewName("system/article/article_edit");
+		mv.addObject("msg", "saveArticle");
+		mv.addObject("pd", pd);
+		return mv;
+	}
 	
 	/**
      * 保存文章

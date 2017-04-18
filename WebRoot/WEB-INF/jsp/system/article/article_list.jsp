@@ -45,9 +45,16 @@
 									</td>
 									<td style="padding-left:2px;"><input class="span10 date-picker" name="lastEditStart" id="lastEditStart"  value="${pd.lastEditStart}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:86px;" placeholder="开始日期" title="最近编辑开始"/></td>
 									<td style="padding-left:2px;"><input class="span10 date-picker" name="lastEditEnd" 	 id="lastEditEnd"    value="${pd.lastEditEnd}"   type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:86px;" placeholder="结束日期" title="最近编辑结束"/></td>
-
+									<td style="vertical-align:top;padding-left:2px;">
+										<select class="chosen-select form-control" name="STATUS" id="STATUS" data-placeholder="选择发布状态" style="vertical-align:top;width: 120px;">
+											<option value=""></option>
+												<option value="">全部</option>
+												<option value="0" >草稿</option>
+												<option value="1" >已发布</option>
+										</select>
+									</td>
 									<c:if test="${QX.cha == 1 }">
-									<td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-xs" onclick="searchs();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
+										<td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-xs" onclick="searchs();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
 									</c:if>
 								</tr>
 							</table>
@@ -83,7 +90,10 @@
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<td class="center">${article.TITLE }</td>
 											<td class="center">${article.AUTHOR }</td>
-											<td class="center">${article.STATUS }</td>
+											<td class="center">
+												<c:if test="${article.STATUS == 1}">已发布</c:if>
+												<c:if test="${article.STATUS == 0}">草稿</c:if>
+											</td>
 											<td class="center">${article.LAST_EDIT}</td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
@@ -227,7 +237,7 @@ function add(){
 	 diag.Drag=true;
 	 diag.Title ="新增";
 	 diag.URL = '<%=basePath%>article/goAddArticle.do';
-	 diag.Width = 800;
+	 diag.Width = 810;
 	 diag.Height = 600;
 	 diag.CancelEvent = function(){ //关闭事件
 		 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
@@ -250,7 +260,7 @@ function editUser(article_id){
 	 diag.Drag=true;
 	 diag.Title ="资料";
 	 diag.URL = '<%=basePath%>article/goEditArticle.do?ARTICLE_ID='+article_id;
-	 diag.Width = 800;
+	 diag.Width = 810;
 	 diag.Height = 600;
 	 diag.CancelEvent = function(){ //关闭事件
 		 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){

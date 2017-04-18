@@ -70,6 +70,9 @@
 			<if test="pd.lastEditEnd!=null and pd.lastEditEnd!=''">		<!-- 最后编辑时间检索 -->
 				and LAST_EDIT &lt;= #{pd.lastEditEnd}
 			</if>
+			<if test="pd.STATUS!=null and pd.STATUS!=''">	<!-- 最后发布状态检索 -->
+				and STATUS = #{pd.STATUS}
+			</if>
 		order by LAST_EDIT desc
 	</select>
 
@@ -80,7 +83,11 @@
 		from
 		<include refid="tableName"></include>
 		where
-			CATEGORY = #{pd.CATEGORY}
+				CATEGORY = #{pd.CATEGORY}
+			<if test="pd.STATUS!=null and pd.STATUS!=''">	<!-- 发布状态检索 -->
+				and STATUS = #{pd.STATUS}
+			</if>
+
 		order by LAST_EDIT desc LIMIT #{pd.limit}
 	</select>
 

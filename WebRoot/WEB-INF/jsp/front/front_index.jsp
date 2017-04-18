@@ -66,7 +66,7 @@
 </div>
 <div class="menu">
     <ul class="w1002">
-        <li class="on"><a href="index" >首页</a></li>
+        <li class="on"><a href="" >首页</a></li>
         <li><a href="front/listArticles.do?CATEGORY=1" >机构概况</a></li>
         <li><a href="front/listArticles.do?CATEGORY=2" >公安要闻</a></li>
         <li><a href="front/listArticles.do?CATEGORY=3" >新闻发布</a></li>
@@ -105,39 +105,39 @@
                 <div class="box">
                     <ul class="list">
                         <li>
-                            <a href="ggyw/201704/06092003bcqw.html" target="_blank">
+                            <a href="front/view.do?ARTICLE_ID=a3ee53ca8b654ea59114522bd4a08a0f" target="_blank">
                                 <img src="static/front/upload/images/20170406091825899.jpg" height="310" width="506"/>
                             </a>
                             <p>
-                                <a href="ggyw/201704/06092003bcqw.html" target="_blank">市公安局举行清明祭奠公安英烈活动</a>
+                                <a href="front/view.do?ARTICLE_ID=a3ee53ca8b654ea59114522bd4a08a0f" target="_blank">市公安局举行清明祭奠公安英烈活动</a>
                             </p>
                         </li>
                         <li>
-                            <a href="ggyw/201703/09144243o0il.html" target="_blank">
+                            <a href="front/view.do?ARTICLE_ID=627d5f843ad042da99e381fc5fb9cb2d" target="_blank">
                                 <img src="static/front/upload/images/20170309144220722.jpg" height="310" width="506"/></a>
                             <p>
-                                <a href="ggyw/201703/09144243o0il.html" target="_blank">姜明副市长深入基层调研交通管理工作</a>
+                                <a href="front/view.do?ARTICLE_ID=627d5f843ad042da99e381fc5fb9cb2d" target="_blank">姜明副市长深入基层调研交通管理工作</a>
                             </p>
                         </li>
                         <li>
-                            <a href="ggyw/201703/03151751ya0e.html" target="_blank">
+                            <a href="front/view.do?ARTICLE_ID=430cfd1a456e45279c34909d1ee819fd" target="_blank">
                                 <img src="static/front/upload/images/20170303151538620.jpg" height="310" width="506"/></a>
                             <p>
-                                <a href="ggyw/201703/03151751ya0e.html" target="_blank">市局召开全市公安工作会议暨2016年度总...</a>
+                                <a href="front/view.do?ARTICLE_ID=430cfd1a456e45279c34909d1ee819fd" target="_blank">市局召开全市公安工作会议暨2016年度总...</a>
                             </p>
                         </li>
                         <li>
-                            <a href="ggyw/201702/17102013c28q.html" target="_blank">
+                            <a href="front/view.do?ARTICLE_ID=0b721e63dc2d48048ee85981dc0cff3e" target="_blank">
                                 <img src="static/front/upload/images/20170217101628983.png" height="310" width="506"/></a>
                             <p>
-                                <a href="ggyw/201702/17102013c28q.html" target="_blank">姜明副市长到巢湖市局调研指导工作 </a>
+                                <a href="front/view.do?ARTICLE_ID=0b721e63dc2d48048ee85981dc0cff3e" target="_blank">姜明副市长到巢湖市局调研指导工作 </a>
                             </p>
                         </li>
                         <li>
-                            <a href="ggyw/201702/17101146dha5.html" target="_blank">
+                            <a href="front/view.do?ARTICLE_ID=b86d5fc67aaf47ffa67618306a91f953" target="_blank">
                                 <img src="static/front/upload/images/20170217101034629.jpg" height="310" width="506"/></a>
                             <p>
-                                <a href="ggyw/201702/17101146dha5.html" target="_blank">姜明副市长看望慰问2016年度新招录民警</a>
+                                <a href="front/view.do?ARTICLE_ID=b86d5fc67aaf47ffa67618306a91f953" target="_blank">姜明副市长看望慰问2016年度新招录民警</a>
                             </p>
                         </li>
                     </ul>
@@ -151,8 +151,10 @@
                 </ul>
                 <div class="plus"></div>
                 <div class="minus"></div>
-
             </div>
+            <script src="static/front/style/js/jquery.cxslide.min.js"></script>
+            <script>$("#slide_x").cxSlide({plus:true,minus:true});</script>
+
             <!--c1 end-->
             <!--c2 start-->
             <div class="fr box1C2">

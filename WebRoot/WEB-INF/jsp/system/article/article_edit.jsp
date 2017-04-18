@@ -57,11 +57,11 @@
                                                                  placeholder="编辑日期" title="编辑日期"/>
                             本文作者：<input type="text"   name="AUTHOR"      id="AUTHOR"     value="${pd.AUTHOR }"    style="width:25%;" /><br>
                             发布状态：<select  class="chosen-select" name="STATUS" id="STATUS" data-placeholder="请选择文章状态"  style="width:25%;" >
-                                        <option value="0" <c:if test="${'1' == pd.STATUS }">selected</c:if> >作为草稿</option>
-                                        <option value="1" <c:if test="${'2' == pd.STATUS }">selected</c:if> >立即发布</option>
+                                        <option value="0" <c:if test="${'0' == pd.STATUS }">selected</c:if> >作为草稿</option>
+                                        <option value="1" <c:if test="${'1' == pd.STATUS }">selected</c:if> >立即发布</option>
                                     </select>
                             <a class="btn btn-mini btn-primary" onclick="save();">保存</a><br><br>
-                            <script  type="text/plain" name="CONTENT"  id="CONTENT" style="width:1024px;height:200px;">${pd.CONTENT }</script>
+                            <script  type="text/plain" name="CONTENT"  id="CONTENT" style="width:780px;height:200px;">${pd.CONTENT }</script>
                             </div>
                             <div id="zhongxin2" class="center" style="display:none"><br/><br/><br/><br/><img
                                     src="static/images/jiazai.gif"/><br/><h4 class="lighter block green"></h4></div>
@@ -128,7 +128,6 @@
         } else {
             $("#LAST_EDIT").val($.trim($("#LAST_EDIT").val()));
         }
-        bootbox.alert("content = " + $("#CONTENT").val(), function(){});
         bootbox.confirm("确定要保存吗?", function (result) {
             if (result) {
                 $("#articleForm").submit();
