@@ -2,7 +2,6 @@ package com.fh.controller.system.head;
 
 import com.fh.controller.base.BaseController;
 import com.fh.service.system.appuser.AppuserManager;
-import com.fh.service.system.fhsms.FhsmsManager;
 import com.fh.service.system.user.UserManager;
 import com.fh.util.*;
 import com.fh.util.mail.SimpleMailSender;
@@ -31,8 +30,6 @@ public class HeadController extends BaseController {
     private UserManager userService;
     @Resource(name = "appuserService")
     private AppuserManager appuserService;
-    @Resource(name = "fhsmsService")
-    private FhsmsManager fhsmsService;
 
     /**
      * 获取头部信息
@@ -56,7 +53,6 @@ public class HeadController extends BaseController {
             }
             pdList.add(pds);
             map.put("list", pdList);
-            map.put("fhsmsCount", fhsmsService.findFhsmsCount(Jurisdiction.getUsername()).get("fhsmsCount").toString());//站内信未读总数
             String strWEBSOCKET = Tools.readTxtFile(Const.WEBSOCKET);       //读取WEBSOCKET配置
             if (null != strWEBSOCKET && !"".equals(strWEBSOCKET)) {
                 String strIW[] = strWEBSOCKET.split(",fh,");
@@ -74,24 +70,6 @@ public class HeadController extends BaseController {
         return AppUtil.returnObject(pd, map);
     }
 
-    /**
-     * 获取站内信未读总数
-     * @return
-     */
-    @RequestMapping(value = "/getFhsmsCount")
-    @ResponseBody
-    public Object getFhsmsCount() {
-        PageData pd = new PageData();
-        Map<String, Object> map = new HashMap<String, Object>();
-        try {
-            map.put("fhsmsCount", fhsmsService.findFhsmsCount(Jurisdiction.getUsername()).get("fhsmsCount").toString());//站内信未读总数
-        } catch (Exception e) {
-            logger.error(e.toString(), e);
-        } finally {
-            logAfter(logger);
-        }
-        return AppUtil.returnObject(pd, map);
-    }
 
     /**
      * 去发送邮箱页面
